@@ -1,6 +1,6 @@
 import { basicFetch, mutateFetch } from '../fetchFunctions';
 
-const END_POINT = './main';
+const END_POINT = '/todos/1';
 
 // TODO: 명세에 맞는 타입 작성 후, Promise<리턴타입> 추가하기
 
@@ -9,12 +9,10 @@ export const fetchMain = async () => {
   return result;
 };
 
-export const fetchMainKey = ['main', '-'];
-
 export const mutateMain = async (
   method: 'post' | 'put' | 'patch' | 'delete',
-  data?: Object
+  payload?: Object
 ) => {
-  const result = await mutateFetch(END_POINT, method, data);
+  const result = await mutateFetch(END_POINT, method, payload);
   return result;
 };
