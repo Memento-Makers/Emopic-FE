@@ -1,4 +1,9 @@
-import Image from 'next/image'
+import Image from 'next/image';
+import { server } from '../mocks/server';
+
+if (process.env.NODE_ENV === 'development') {
+  server.listen();
+}
 
 export default function Home() {
   return (
@@ -109,5 +114,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  )
+  );
 }
