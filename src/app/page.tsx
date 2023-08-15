@@ -13,7 +13,7 @@ export default function Home() {
         />
       </Head>
       <RootLayout>
-        <div className="w-[100%] h-[100vh] bg-blue-600">임시 레이아웃 영역</div>
+        <div className="w-[100%] h-[100%] bg-blue-600">임시 레이아웃 영역</div>
       </RootLayout>
     </>
   );
