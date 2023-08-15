@@ -30,6 +30,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "daisyui": "^3.5.1",
     "msw": "^1.2.3"
   }
 }
