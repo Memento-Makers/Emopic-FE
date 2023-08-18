@@ -1,7 +1,8 @@
-import Image from 'next/image';
 import RootLayout from './layout';
 import Head from 'next/head';
 import './globals.css';
+import { BasicHeader } from '@/components';
+import { DUMMY_IMAGE } from '@/constants';
 
 export default function Home() {
   return (
@@ -13,7 +14,8 @@ export default function Home() {
         />
       </Head>
       <RootLayout>
-        <div className="w-[100%] h-[100%] bg-blue-600">임시 레이아웃 영역</div>
+        <BasicHeader profileImage={DUMMY_IMAGE} />
+        <></>
       </RootLayout>
     </>
   );
