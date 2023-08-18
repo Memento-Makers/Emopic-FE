@@ -1,1 +1,4 @@
-// 서버 컴포넌트
+export * from './BasicHeader';
+export * from './Avatar';
+export * from './StyledImage';
+export * from './Logo';
