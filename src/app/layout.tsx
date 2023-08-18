@@ -16,10 +16,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={inter.className}>
-        <div data-theme="winter" className="container sm:mx-auto h-[100vh]">
-          {children}
-        </div>
+      <body data-theme="winter" className="container sm:mx-auto h-[100vh]">
+        {children}
       </body>
     </html>
   );
