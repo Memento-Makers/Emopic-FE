@@ -12,7 +12,7 @@ export const PreviewList = ({ images, title }: PreviewListProps) => {
       <PreviewHeader title={title} />
       <div className="carousel carousel-center rounded-box gap-[10px] overflow-scroll w-[100%]">
         {images.map(image => (
-          <PreviewListItem imageUrl={image} />
+          <PreviewListItem key={image} imageUrl={image} />
         ))}
       </div>
     </section>

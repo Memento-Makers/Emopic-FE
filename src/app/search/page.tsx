@@ -25,7 +25,11 @@ export default function Home() {
       <main className=" px-3">
         {categories.map((category, index) => (
           <>
-            <PreviewList images={category.images} title={category.title} />
+            <PreviewList
+              key={index}
+              images={category.images}
+              title={category.title}
+            />
             {index < categories.length - 1 && <Spacer size={24} />}
           </>
         ))}

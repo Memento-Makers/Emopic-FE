@@ -4,7 +4,7 @@ export const BasicHeader = ({ profileImage }: { profileImage: string }) => {
   return (
     <header
       data-theme="winter"
-      className="flex justify-between items-center px-4 py-2"
+      className=" top-0 flex justify-between items-center "
     >
       <div className="flex items-center gap-[5px]">
         <Logo width={56} height={56} />
