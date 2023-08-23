@@ -1,5 +1,3 @@
-import BackgroundImage from '../../../../public/assets/soragrit-wongsa-aV5xrpB0bwQ-unsplash.jpg';
-
 export const Hero = () => {
   return (
     <div
