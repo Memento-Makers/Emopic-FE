@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { BasicHeader, PreviewList, Spacer, FloatingButton } from '@/components';
 
-
 // 분류 별 더미 데이터 생성 함수
 function createDummy() {
   return Array.from(
@@ -22,7 +21,7 @@ export default function Home() {
     <div className="h-[100vh] relative">
       <BasicHeader profileImage="https://picsum.photos/200" />
       <FloatingButton />
-      <main className="bg-black px-3">
+      <main className="px-3">
         {categories.map((category, index) => (
           <>
             <PreviewList
