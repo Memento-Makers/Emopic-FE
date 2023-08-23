@@ -9,3 +9,4 @@ export * from './Hero';
 export * from './LinkButton';
 export * from './ImageUploadTitle';
 export * from './SearchResultList';
+export * from './ImageCaptionSection';
