@@ -7,3 +7,4 @@ export * from './PreviewList';
 export * from './Spacer';
 export * from './Hero';
 export * from './LinkButton';
+export * from './SearchResultList';
