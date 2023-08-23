@@ -1,3 +1,4 @@
+import { BLUR_DATA_URL } from '@/constants';
 import Image from 'next/image';
 
 interface StyledImageProps {
@@ -10,13 +11,10 @@ interface StyledImageProps {
   placeholder?: 'blur' | 'empty' | undefined;
 }
 
-const BLUR_DATA_URL =
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgAB/epDqWsAAAAASUVORK5CYII=';
-
 export const StyledImage = ({
   src,
-  width,
-  height,
+  width = 'auto',
+  height = 'auto',
   alt,
   className,
   style,
