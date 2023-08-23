@@ -8,3 +8,4 @@ export * from './Spacer';
 export * from './Hero';
 export * from './LinkButton';
 export * from './ImageUploadTitle';
+export * from './SearchResultList';
