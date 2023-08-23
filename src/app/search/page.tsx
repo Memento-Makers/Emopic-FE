@@ -1,6 +1,6 @@
-import { BasicHeader, PreviewList, Spacer } from '@/components';
+import Image from 'next/image';
+import { BasicHeader, PreviewList, Spacer, FloatingButton } from '@/components';
 
-// TODO: 모킹한 데이터로 수정
 
 // 분류 별 더미 데이터 생성 함수
 function createDummy() {
@@ -19,10 +19,10 @@ const categories = [
 
 export default function Home() {
   return (
-    <>
-      {/* TODO: 더미 이미지 사용, 백엔드에게 더미 유저 프로필 사진 내려달라고 하기 */}
+    <div className="h-[100vh] relative">
       <BasicHeader profileImage="https://picsum.photos/200" />
-      <main className=" px-3">
+      <FloatingButton />
+      <main className="bg-black px-3">
         {categories.map((category, index) => (
           <>
             <PreviewList
@@ -34,6 +34,6 @@ export default function Home() {
           </>
         ))}
       </main>
-    </>
+    </div>
   );
 }
