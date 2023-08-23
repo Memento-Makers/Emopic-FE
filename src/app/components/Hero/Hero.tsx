@@ -1,3 +1,5 @@
+import { LinkButton } from '@/components';
+
 export const Hero = () => {
   return (
     <div
@@ -17,7 +19,11 @@ export const Hero = () => {
             <br />
             사진 속 한 장면, 그 순간의 감동을 다시 느껴보세요.
           </p>
-          <button className="btn btn-primary">지금 바로 시작해보세요!</button>
+          <LinkButton
+            url="/search"
+            content="지금 바로 시작해보세요!"
+            className="btn-primary"
+          />
         </div>
       </div>
     </div>
