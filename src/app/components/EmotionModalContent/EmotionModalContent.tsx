@@ -11,10 +11,18 @@ const subEmotionIdsGroup3: EmotionId[] = [301, 302, 303, 304, 305];
 
 export interface EmotionModalContentProps {
   emotionList: EmotionId[]; // 현재 선택된 감정 리스트
+  handleSubmit: ({
+    mainEmotion,
+    subEmotion,
+  }: {
+    mainEmotion: EmotionId;
+    subEmotion: EmotionId[];
+  }) => void;
 }
 
 export const EmotionModalContent = ({
   emotionList,
+  handleSubmit,
 }: EmotionModalContentProps) => {
   const [emotionMap, setEmotionMap] = useState(new Map());
 
@@ -27,6 +35,7 @@ export const EmotionModalContent = ({
     }
   });
 
+  // Main 감정 선택
   const handleMainEmotionId = (id: EmotionId, relatedIds: number[]) => {
     const newMap = new Map(emotionMap);
 
@@ -37,6 +46,7 @@ export const EmotionModalContent = ({
     setEmotionMap(newMap);
   };
 
+  // Sub 감정 선택
   const handleSubEmotionId = (id: EmotionId) => {
     const newMap = new Map(emotionMap);
 
@@ -46,13 +56,28 @@ export const EmotionModalContent = ({
     setEmotionMap(newMap);
   };
 
+  // Main 감정이 선택되었는지 확인
+  const isMainEmotionSelected = mainEmotionIds.some(id => !!emotionMap.get(id));
+
+  // 감정 추가하기 버튼 클릭 시 호출되는 함수
+  const addEmotions = () => {
+    const mainEmotion = mainEmotionIds.find(id => !!emotionMap.get(id));
+    const subEmotion = [...subEmotionIdsGroup1, ...subEmotionIdsGroup3].filter(
+      id => !!emotionMap.get(id)
+    );
+
+    if (mainEmotion !== undefined) {
+      handleSubmit({ mainEmotion, subEmotion });
+    }
+  };
+
   return (
-    <div className=" bg-sky-100 p-[10px] rounded-lg ">
-      <div className=" bg-white p-[20px] ">
+    <div className="  p-[10px] rounded-lg flex flex-col items-center">
+      <div className=" bg-white p-[20px] w-[100%] ">
         <p className=" text-[24px] font-bold text-center">기본 감정 선택하기</p>
         <Spacer size={30} />
 
-        <div className="flex gap-[10px] items-center justify-between text-[80px]">
+        <div className="flex gap-[10px] items-center justify-between text-[80px] w-[100%]">
           {mainEmotionIds.map((id, index) => (
             <EmotionIcon
               emotionId={id}
@@ -99,6 +124,16 @@ export const EmotionModalContent = ({
           ))}
         </div>
       </div>
+      <Spacer size={30} />
+      <button
+        className={`btn btn-outline btn-primary w-[90%] text-[20px] ${
+          !isMainEmotionSelected ? 'btn-disabled' : ''
+        }`}
+        onClick={addEmotions}
+        disabled={!isMainEmotionSelected} // Main 감정이 선택되지 않았다면 버튼을 비활성화
+      >
+        감정 추가하기
+      </button>
     </div>
   );
 };
