@@ -1,8 +1,23 @@
 'use client';
 
 import { AiOutlineCloudUpload } from 'react-icons/ai';
+import { useFileStore } from '@/stores';
+import { useRouter } from 'next/navigation';
 
 export const FloatingButton = () => {
+  const { addFiles, clearFiles } = useFileStore();
+  const router = useRouter();
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+
+      clearFiles();
+      addFiles(files);
+      router.push('/upload');
+    }
+  };
+
   return (
     <>
       <label
@@ -19,6 +34,7 @@ export const FloatingButton = () => {
         className=" hidden"
         multiple
         accept="image/*"
+        onChange={handleFileChange}
       />
     </>
   );
