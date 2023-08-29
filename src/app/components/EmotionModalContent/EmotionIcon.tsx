@@ -18,7 +18,9 @@ export const EmotionIcon = ({
 }: EmotionsProps) => {
   return (
     <button
-      className="flex flex-col items-center relative"
+      className={`flex flex-col items-center relative ${
+        isChecked && 'text-primary'
+      }`}
       onClick={() => handleEmotionId(emotionId)}
     >
       {isRecommend && (
@@ -29,9 +31,7 @@ export const EmotionIcon = ({
 
       <div
         className={
-          isChecked
-            ? 'text-primary border-primary'
-            : 'text-gray-400 border-gray-300'
+          isChecked ? 'border-primary' : 'text-gray-400 border-gray-300'
         }
       >
         {emotionData[emotionId]?.icon}
