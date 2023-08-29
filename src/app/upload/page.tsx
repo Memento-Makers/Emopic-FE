@@ -5,6 +5,7 @@ import { BasicHeader } from '@/components';
 import { useRouter } from 'next/navigation';
 
 import RootLayout from '@/app/layout';
+import { useEffect } from 'react';
 
 export default function UploadPage() {
   // TODO: 여기서 모든 작업이 끝나면 file을 clear 해줘야 함.
@@ -13,9 +14,11 @@ export default function UploadPage() {
   console.log(files);
   const router = useRouter();
 
-  if (files.length === 0) {
-    router.push('/search');
-  }
+  useEffect(() => {
+    if (files.length === 0) {
+      router.push('/search');
+    }
+  }, [files]);
 
   return (
     <RootLayout>
@@ -24,7 +27,7 @@ export default function UploadPage() {
       <main>
         {files.map(file => {
           const objectUrl = URL.createObjectURL(file);
-          return <img src={objectUrl} />;
+          return <img key={objectUrl} src={objectUrl} />;
         })}
       </main>
     </RootLayout>
