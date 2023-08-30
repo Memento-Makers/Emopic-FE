@@ -7,11 +7,13 @@ import { DiaryButton } from '@/components';
 export interface PhotoDetailHeaderProps {
   categories: string[]; // 분류 결과 클래스 (3개 까지)
   uploadDate: string; // 사진 업로드 시간
+  handleDiaryButtonClick: () => void;
 }
 
 export const PhotoDetailHeader = ({
   categories,
   uploadDate,
+  handleDiaryButtonClick,
 }: PhotoDetailHeaderProps) => {
   const router = useRouter();
 
@@ -31,7 +33,7 @@ export const PhotoDetailHeader = ({
         <ul className="flex items-center gap-2 mb-3">
           {categories.map(category => (
             <li
-              key="category"
+              key={category}
               className="badge badge-primary badge-outline badge-lg text-[16px]"
             >
               {category}
@@ -42,7 +44,7 @@ export const PhotoDetailHeader = ({
         <p>{uploadDate}</p>
       </div>
 
-      <DiaryButton className="" />
+      <DiaryButton className="" handleOnClick={handleDiaryButtonClick} />
     </header>
   );
 };
