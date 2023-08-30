@@ -1,3 +1,3 @@
 export * from './EmotionModalContent';
-export * from './EmotionIcon';
+export * from './EmotionIconButton';
 export * from './EmotionData';
