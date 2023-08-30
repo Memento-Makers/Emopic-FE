@@ -12,3 +12,5 @@ export * from './SearchResultList';
 export * from './ImageCaptionSection';
 export * from './EmotionModalContent';
 export * from './PhotoDetailHeader';
+export * from './DiaryButton';
+export * from './ChatBubble';
