@@ -21,7 +21,10 @@ export const EmotionIconButton = ({
       className={`flex flex-col items-center relative ${
         isChecked && 'text-primary'
       }`}
-      onClick={() => handleEmotionId(emotionId)}
+      onClick={event => {
+        event.preventDefault();
+        handleEmotionId(emotionId);
+      }}
     >
       {isRecommend && (
         <div className="badge badge-accent absolute top-[-5px] left-[-2px]">
