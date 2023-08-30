@@ -1,5 +1,5 @@
 import { BasicResponse, PhotoRequest } from '..';
-import { Emotion } from '@/types';
+import { Emotion, EmotionId } from '@/types';
 
 // 사진 업로드
 export interface PhotoUploadRequest {
@@ -23,13 +23,23 @@ export interface ImageCaptioningData {
 export type ImageCaptioningResponse = BasicResponse<ImageCaptioningData>;
 
 // 개별 사진 조회
+
+// 각 사진의 감정 데이터
+export interface PhotoEmotion {
+  emotionId: EmotionId;
+  name: string;
+}
+export interface PhotoEmotionData {
+  main: PhotoEmotion[];
+  sub: PhotoEmotion[];
+}
 export interface IndividualPhotoData {
   photoId: number;
   signedUrl: string; // 이미지 다운로드 경로
   diaryId: number;
   diaryContent: string; // 일기장 내용
   classes: string[]; // ["분류 1","분류 2","분류 3"]
-  emotions: Emotion[];
+  emotions: PhotoEmotionData;
 }
 
 export type IndividualPhotoResponse = BasicResponse<IndividualPhotoData>;

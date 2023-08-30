@@ -14,3 +14,6 @@ export * from './EmotionModalContent';
 export * from './PhotoDetailHeader';
 export * from './DiaryButton';
 export * from './ChatBubble';
+export * from './AddEmotionButton';
+export * from './DiaryContent';
+export * from './EmotionIcon';

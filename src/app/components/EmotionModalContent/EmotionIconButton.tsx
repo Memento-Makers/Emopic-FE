@@ -10,7 +10,7 @@ export interface EmotionsProps {
   handleEmotionId: (id: number) => void; // 윗 쪽 컴포넌트에 넘기기 위한 콜백
 }
 
-export const EmotionIcon = ({
+export const EmotionIconButton = ({
   emotionId,
   isRecommend,
   handleEmotionId,
@@ -21,7 +21,10 @@ export const EmotionIcon = ({
       className={`flex flex-col items-center relative ${
         isChecked && 'text-primary'
       }`}
-      onClick={() => handleEmotionId(emotionId)}
+      onClick={event => {
+        event.preventDefault();
+        handleEmotionId(emotionId);
+      }}
     >
       {isRecommend && (
         <div className="badge badge-accent absolute top-[-5px] left-[-2px]">
