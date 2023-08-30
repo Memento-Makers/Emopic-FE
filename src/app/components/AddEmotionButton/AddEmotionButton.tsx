@@ -18,7 +18,6 @@ export const AddEmotionButton = () => {
   };
 
   const closeDialog = () => {
-    console.log('close!');
     if (dialogRef.current) {
       dialogRef.current.close();
     }
