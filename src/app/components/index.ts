@@ -11,3 +11,4 @@ export * from './ImageUploadTitle';
 export * from './SearchResultList';
 export * from './ImageCaptionSection';
 export * from './EmotionModalContent';
+export * from './PhotoDetailHeader';
