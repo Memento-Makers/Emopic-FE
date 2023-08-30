@@ -22,10 +22,12 @@ export const ChatBubble = ({ className, content }: ChatBubbleProps) => {
         isVisible
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-[-100px]'
-      } ${className}`}
+      } ${className}
+      z-[999]
+      `}
     >
       <div className="chat chat-end rotate-[270deg]">
-        <div className="chat-bubble h-[300px]"></div>
+        <div className="chat-bubble chat-bubble-primary h-[300px]"></div>
       </div>
       <p className="absolute bottom-[44%] left-[-150%] w-[300px] text-white">
         {content}
