@@ -1,7 +1,7 @@
 'use client';
 
 import { Spacer } from '..';
-import { EmotionIcon } from './EmotionIcon';
+import { EmotionIconButton } from './EmotionIconButton';
 import { useState } from 'react';
 import { EmotionId } from '@/types';
 
@@ -79,7 +79,7 @@ export const EmotionModalContent = ({
 
         <div className="flex gap-[10px] items-center justify-between text-[80px] w-[100%]">
           {mainEmotionIds.map((id, index) => (
-            <EmotionIcon
+            <EmotionIconButton
               emotionId={id}
               key={id}
               isRecommend={false}
@@ -104,7 +104,7 @@ export const EmotionModalContent = ({
 
         <div className="grid grid-cols-4 text-[65px] gap-x-5 gap-y-10">
           {subEmotionIdsGroup1.map(id => (
-            <EmotionIcon
+            <EmotionIconButton
               emotionId={id}
               key={id}
               isRecommend={!!emotionMap.get(1)}
@@ -114,7 +114,7 @@ export const EmotionModalContent = ({
           ))}
 
           {subEmotionIdsGroup3.map(id => (
-            <EmotionIcon
+            <EmotionIconButton
               emotionId={id}
               key={id}
               isRecommend={!!emotionMap.get(3)}
