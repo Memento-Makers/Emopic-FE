@@ -28,7 +28,7 @@ export const PhotoDetailHeader = ({
       </button>
 
       <div className=" flex justify-between items-center flex-col">
-        <ul className="flex items-center gap-2 mb-3 w-[200px]">
+        <ul className="flex items-center gap-2 mb-3">
           {categories.map(category => (
             <li
               key="category"
