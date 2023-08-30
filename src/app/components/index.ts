@@ -17,3 +17,4 @@ export * from './ChatBubble';
 export * from './AddEmotionButton';
 export * from './DiaryContent';
 export * from './EmotionIcon';
+export * from './DiaryBottomSheet';
