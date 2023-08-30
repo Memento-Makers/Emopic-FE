@@ -3,15 +3,15 @@ import { ChatBubble } from '@/components';
 
 export interface DiaryButtonProps {
   className?: string;
+  handleOnClick?: () => void;
 }
 
-// TODO: DiaryButton 을 클릭하면, 바텀시트가 올라오면서 일기장 내용이 보인다.
-
-export const DiaryButton = ({ className }: DiaryButtonProps) => {
+export const DiaryButton = ({ className, handleOnClick }: DiaryButtonProps) => {
   return (
     <div className="relative w-fit">
       <button
         className={`btn btn-outline btn-primary rounded-full w-[60px] h-[60px] text-primary ${className}`}
+        onClick={handleOnClick}
       >
         <BsJournalBookmarkFill className="text-[30px]" />
       </button>
