@@ -7,7 +7,8 @@ import {
   SortInfo,
 } from '@/types';
 
-// 이미지 분류 결과 요청
+// 이미지 분류 결과 요청 (POST)
+// /api/v1/photos/categories
 export type CategoryRequest = PhotoRequest;
 
 export interface CategoryData {
@@ -17,7 +18,9 @@ export interface CategoryData {
 
 export type CategoryResponse = BasicResponse<CategoryData>;
 
-// 분류 결과 전체 조회
+// 분류 결과 전체 조회 (GET), query paramter를 뜻함 (지워야함)
+// /api/v1/photos/catgories?size=6
+
 export interface CategoryResultRequest {
   size: number; // 받고 싶은 상위(사진이 많은 순) 클래스 개수
 }
@@ -28,7 +31,8 @@ export interface CategoryResultData {
 
 export type CategoryResultResponse = BasicResponse<CategoryResultData>;
 
-// 분류 결과 세부 조회
+// 분류 결과 세부 조회 (GET)
+// /api/v1/photos/categories/categoriId
 export interface CategoryDetailRequest {
   size: number;
   page: number;
