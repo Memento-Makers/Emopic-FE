@@ -10,7 +10,7 @@ export interface PhotoDetailHeaderProps {
   handleDiaryButtonClick: () => void;
 }
 
-export const PhotoDetailHeader = ({
+const PhotoDetailHeader = ({
   categories,
   uploadDate,
   handleDiaryButtonClick,
@@ -48,3 +48,5 @@ export const PhotoDetailHeader = ({
     </header>
   );
 };
+
+export default PhotoDetailHeader;

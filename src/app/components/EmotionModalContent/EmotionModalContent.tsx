@@ -1,7 +1,7 @@
 'use client';
 
 import { Spacer } from '..';
-import { EmotionIconButton } from './EmotionIconButton';
+import EmotionIconButton from './EmotionIconButton';
 import { useState } from 'react';
 import { EmotionId } from '@/types';
 
@@ -20,7 +20,7 @@ export interface EmotionModalContentProps {
   }) => void;
 }
 
-export const EmotionModalContent = ({
+const EmotionModalContent = ({
   emotionList,
   handleSubmit,
 }: EmotionModalContentProps) => {
@@ -137,3 +137,5 @@ export const EmotionModalContent = ({
     </div>
   );
 };
+
+export default EmotionModalContent;

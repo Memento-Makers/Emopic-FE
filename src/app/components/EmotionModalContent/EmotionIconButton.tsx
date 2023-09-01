@@ -10,7 +10,7 @@ export interface EmotionsProps {
   handleEmotionId: (id: number) => void; // 윗 쪽 컴포넌트에 넘기기 위한 콜백
 }
 
-export const EmotionIconButton = ({
+const EmotionIconButton = ({
   emotionId,
   isRecommend,
   handleEmotionId,
@@ -44,3 +44,5 @@ export const EmotionIconButton = ({
     </button>
   );
 };
+
+export default EmotionIconButton;

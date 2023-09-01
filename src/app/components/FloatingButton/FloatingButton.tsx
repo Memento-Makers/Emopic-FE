@@ -4,7 +4,7 @@ import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { useFileStore } from '@/stores';
 import { useRouter } from 'next/navigation';
 
-export const FloatingButton = () => {
+const FloatingButton = () => {
   const { addFiles, clearFiles } = useFileStore();
   const router = useRouter();
 
@@ -39,3 +39,5 @@ export const FloatingButton = () => {
     </>
   );
 };
+
+export default FloatingButton;

@@ -1,1 +1,1 @@
-export * from './AddEmotionButton';
+export { default as AddEmotionButton } from './AddEmotionButton';

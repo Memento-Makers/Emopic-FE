@@ -1,1 +1,1 @@
-export * from './PhotoDetailHeader';
+export { default as PhotoDetailHeader } from './PhotoDetailHeader';

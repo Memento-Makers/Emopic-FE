@@ -1,1 +1,1 @@
-export * from './DiaryBottomSheet';
+export { default as DiaryBottomSheet } from './DiaryBottomSheet';

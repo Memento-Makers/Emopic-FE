@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import { EmotionModalContent } from '@/components';
 import { EmotionId } from '@/types';
 
-export const AddEmotionButton = () => {
+const AddEmotionButton = () => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const openDialog = () => {
@@ -66,3 +66,5 @@ export const AddEmotionButton = () => {
     </>
   );
 };
+
+export default AddEmotionButton;
