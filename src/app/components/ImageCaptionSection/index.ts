@@ -1,0 +1,1 @@
+export { ImageCaptionSection } from './ImageCaptionSection';

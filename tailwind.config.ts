@@ -6,7 +6,49 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  // TODO: 사용하지 않는 테마 제거하기
+  daisyui: {
+    styled: true,
+    themes: [
+      'light',
+      'dark',
+      'cupcake',
+      'bumblebee',
+      'emerald',
+      'corporate',
+      'synthwave',
+      'retro',
+      'cyberpunk',
+      'valentine',
+      'halloween',
+      'garden',
+      'forest',
+      'aqua',
+      'lofi',
+      'pastel',
+      'fantasy',
+      'wireframe',
+      'black',
+      'luxury',
+      'dracula',
+      'cmyk',
+      'autumn',
+      'business',
+      'acid',
+      'lemonade',
+      'night',
+      'coffee',
+      'winter',
+    ],
+  },
   theme: {
+    extends: {
+      colors: {
+        'white-background': '#f3f4f6', // 원하는 색상 코드 입력
+        // 여기에 추가로 사용자 정의 색상을 넣을 수 있습니다.
+      },
+    },
+
     container: {
       center: true,
       padding: '1rem',
@@ -15,17 +57,12 @@ const config: Config = {
       },
     },
     extend: {
-      backgroundImage: {
-        // tailwind에서 제공한 기본 값
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
       fontFamily: {
         sans: ['Pretendard', 'Arial', 'sans-serif'],
       },
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 };
+
 export default config;

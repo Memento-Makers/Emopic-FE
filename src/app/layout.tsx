@@ -15,9 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className="container sm:mx-auto sm:h-[100vh]">{children}</div>
+    <html lang="ko">
+      <body data-theme="winter" className="container sm:mx-auto h-[100vh]">
+        {children}
       </body>
     </html>
   );
