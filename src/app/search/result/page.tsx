@@ -44,21 +44,19 @@ export default function SearchResult() {
   console.log(dummyData);
 
   return (
-    <RootLayout>
-      <>
-        <BasicHeader profileImage="https://picsum.photos/200" />
-        <main>
-          {/* TODO: 임시 디자인 */}
-          <p className=" text-[24px] text-red-700">{query}에 대한 검색 결과</p>
-          {dummyData.map(({ date, searchResults }, index) => (
-            <SearchResultList
-              key={index}
-              date={date}
-              searchResults={searchResults as searchResult[]}
-            />
-          ))}
-        </main>
-      </>
-    </RootLayout>
+    <>
+      <BasicHeader profileImage="https://picsum.photos/200" />
+      <main>
+        {/* TODO: 임시 디자인 */}
+        <p className=" text-[24px] text-red-700">{query}에 대한 검색 결과</p>
+        {dummyData.map(({ date, searchResults }, index) => (
+          <SearchResultList
+            key={index}
+            date={date}
+            searchResults={searchResults as searchResult[]}
+          />
+        ))}
+      </main>
+    </>
   );
 }
