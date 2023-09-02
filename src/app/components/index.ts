@@ -21,7 +21,6 @@ export * from './EmotionModalContent';
 export * from './FloatingButton';
 export * from './PhotoDetailHeader';
 export * from './AddEmotionButton';
-export * from './DiaryBottomSheet';
 export * from './ModalDialog';
 export * from './DetailBottomNavigation';
 export * from './DiaryPageHeader';
