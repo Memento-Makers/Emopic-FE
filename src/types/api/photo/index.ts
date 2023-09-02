@@ -30,8 +30,8 @@ export interface PhotoEmotion {
   name: string;
 }
 export interface PhotoEmotionData {
-  main: PhotoEmotion[];
-  sub: PhotoEmotion[];
+  main: EmotionId[];
+  sub: EmotionId[];
 }
 export interface IndividualPhotoData {
   photoId: number;
