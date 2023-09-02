@@ -1,17 +1,24 @@
-import { PhotoEmotionData } from '@/types';
+import { EmotionId, PhotoEmotionData } from '@/types';
 
 import Image from 'next/image';
-import { Spacer, EmotionIcon } from '@/components';
+import { Spacer, EmotionIcon, AddEmotionButton } from '@/components';
 import Link from 'next/link';
 
 export interface DiaryContentProps {
   diaryContent: string;
-  emotions: PhotoEmotionData;
+  emotions: PhotoEmotionData; // 주감정, 서브감정 구분
+  emotionList: EmotionId[]; // 선택되어 있는 감정 리스트
+  className?: string;
 }
 
-export const DiaryContent = ({ diaryContent, emotions }: DiaryContentProps) => {
+export const DiaryContent = ({
+  diaryContent,
+  emotions,
+  emotionList,
+  className,
+}: DiaryContentProps) => {
   return (
-    <div className="p-[20px]">
+    <div className={`p-[20px] ${className}`}>
       <div className=" flex items-center gap-[5px]">
         <h3 className=" text-primary font-bold text-[24px]">
           Today's Story by
@@ -37,16 +44,20 @@ export const DiaryContent = ({ diaryContent, emotions }: DiaryContentProps) => {
       <Spacer size={20} />
 
       <div>
-        <h3 className=" text-primary font-bold text-[24px]">오늘의 감정 </h3>
+        <div className="flex gap-[20px] items-center">
+          <h3 className=" text-primary font-bold text-[24px]">오늘의 감정 </h3>
+          <AddEmotionButton emotionList={emotionList} />
+        </div>
+
         <Spacer size={20} />
 
         <div className=" flex gap-5">
-          {emotions.main.map(({ emotionId }) => (
-            <EmotionIcon key={emotionId} emotionId={emotionId} />
+          {emotions.main.map(emotion => (
+            <EmotionIcon key={emotion} emotionId={emotion} />
           ))}
 
-          {emotions.sub.map(({ emotionId }) => (
-            <EmotionIcon key={emotionId} emotionId={emotionId} />
+          {emotions.sub.map(emotion => (
+            <EmotionIcon key={emotion} emotionId={emotion} />
           ))}
         </div>
       </div>
