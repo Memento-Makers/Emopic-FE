@@ -16,7 +16,7 @@ export const EmotionIcon = ({ emotionId }: EmotionIconProps) => {
           : emotionClass === '2'
           ? 'bg-green-200'
           : 'bg-blue-200'
-      } bg-opacity-50`}
+      } bg-opacity-50 shadow-md`}
     >
       <div className={'text-[70px]'}>{emotionData[emotionId]?.icon}</div>
       <p className="mt-2 text-[18px]">{emotionData[emotionId]?.label}</p>
