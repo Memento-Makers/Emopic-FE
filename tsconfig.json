@@ -26,7 +26,8 @@
       "@/types": ["./src/types"],
       "@/stores": ["./stores"],
       "@/api": ["./src/api"],
-      "@/queries": ["./src/queries"]
+      "@/queries": ["./src/queries"],
+      "@/hooks": ["./src/hooks"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
