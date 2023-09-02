@@ -24,7 +24,9 @@
       "@/components": ["./src/app/components"],
       "@/constants": ["./src/constants"],
       "@/types": ["./src/types"],
-      "@/stores": ["./stores"]
+      "@/stores": ["./stores"],
+      "@/api": ["./src/api"],
+      "@/queries": ["./src/queries"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
