@@ -6,7 +6,11 @@ import { useModal } from '@/hooks';
 import { EmotionModalContent, ModalDialog } from '@/components';
 import { EmotionId } from '@/types';
 
-const AddEmotionButton: React.FC = () => {
+interface AddEmotionButtonProps {
+  emotionList: EmotionId[]; // 선택되어 있는 감정 리스트
+}
+
+const AddEmotionButton = ({ emotionList }: AddEmotionButtonProps) => {
   const { dialogRef, openDialog, closeDialog } = useModal();
 
   const handleSubmit = ({
@@ -39,7 +43,10 @@ const AddEmotionButton: React.FC = () => {
           </button>
         </div>
         <div>
-          <EmotionModalContent emotionList={[]} handleSubmit={handleSubmit} />
+          <EmotionModalContent
+            emotionList={emotionList}
+            handleSubmit={handleSubmit}
+          />
         </div>
       </ModalDialog>
     </>
