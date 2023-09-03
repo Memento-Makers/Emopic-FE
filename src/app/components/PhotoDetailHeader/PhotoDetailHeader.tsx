@@ -7,23 +7,18 @@ import { DiaryButton } from '@/components';
 export interface PhotoDetailHeaderProps {
   categories: string[]; // 분류 결과 클래스 (3개 까지)
   uploadDate: string; // 사진 업로드 시간
-  handleDiaryButtonClick: () => void;
 }
 
 const PhotoDetailHeader = ({
   categories,
   uploadDate,
-  handleDiaryButtonClick,
 }: PhotoDetailHeaderProps) => {
   const router = useRouter();
 
   return (
-    <header
-      data-theme="winter"
-      className=" top-0 flex justify-between items-center p-3 w-[100%] relative"
-    >
+    <header className=" top-0 flex justify-center items-center p-3 w-[100%] relative">
       <button
-        className="button text-[48px] text-primary"
+        className="button text-[48px] text-primary absolute left-2"
         onClick={() => router.back()}
       >
         <PiCaretLeftLight />
@@ -43,8 +38,6 @@ const PhotoDetailHeader = ({
 
         <p>{uploadDate}</p>
       </div>
-
-      <DiaryButton className="" handleOnClick={handleDiaryButtonClick} />
     </header>
   );
 };
