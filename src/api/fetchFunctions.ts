@@ -1,5 +1,6 @@
 // ref : https://github.com/travelmakers/travelmakers-nextjs-boilerplate/blob/main/api/fetchFunctions.tsx
 
+import { BasicResponse } from '@/types';
 import { signOut } from 'next-auth/react';
 
 // TODO: Base URL 환경 변수로 등록하기, 우선 임시 주소 사용
@@ -20,23 +21,15 @@ async function errorException(response: Response) {
 
 export const basicFetch = async <returnType>(
   endpoint: string
-): Promise<returnType> => {
+): Promise<BasicResponse<returnType>> => {
   try {
-    // TODO: user의 인증 정보를 가져오는 코드
-    // 아직 인증 방식이 정해지지 않았으므로, 주석으로만 처리
-    //  const user = await getUserSession();
-    const response = await fetch(`${process.env.BASE_URL}${endpoint}`, {
-      // headers: user
-      //   ? {
-      //       Accept: 'application/json',
-      //       Authorization: `Bearer ${user?.user?.accessToken}`,
-      //     }
-      //   : {
-      //       Accept: 'application/json',
-      //     },
-    });
-    const responseData = await errorException(response);
-    return responseData;
+    // 생략...
+    const response = await fetch(`${process.env.BASE_URL}${endpoint}`);
+    const responseData = (await response.json()) as BasicResponse<returnType>; // as를 사용해 타입을 명시
+    if (response.ok) {
+      return responseData;
+    }
+    throw new Error(responseData.message || 'An error occurred');
   } catch (error) {
     throw error;
   }
