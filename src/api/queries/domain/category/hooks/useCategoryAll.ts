@@ -1,22 +1,13 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { categoryAPI } from '@/api';
-import { categoryKeys } from '@/api';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { categoryAPI, categoryKeys } from '@/api';
+import { CategoryAllData } from '@/types';
 
-const useCategoryAll = () => {
+const useCategoryAll = (size?: number) => {
   const userId = parseInt(process.env.NEXT_PUBLIC_DUMMY_USER_ID as string) || 1;
-  const queryClient = useQueryClient();
 
-  const getCategoryAll = useMutation(
-    (photoId: number) => categoryAPI.getCategoriesAll(),
-    {
-      onSuccess: (data, variables) => {
-        const photoId = variables as number;
-        queryClient.invalidateQueries(categoryKeys.requestAll(userId));
-      },
-    }
+  return useQuery<CategoryAllData>(categoryKeys.requestAll(userId), () =>
+    categoryAPI.getCategoriesAll(size)
   );
-
-  return getCategoryAll;
 };
 
 export default useCategoryAll;
