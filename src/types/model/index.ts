@@ -13,6 +13,7 @@ export interface Emotion {
 
 // 각 카테고리의 정보를 담는 인터페이스
 export interface CategoryInfo {
+  categoryId: number;
   category: string;
   count: number;
   thumbnail: string;

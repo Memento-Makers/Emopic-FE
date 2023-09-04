@@ -1,5 +1,5 @@
 import { BasicResponse, PhotoRequest } from '..';
-import { Emotion } from '@/types';
+import { Emotion, EmotionId } from '@/types';
 
 // 전체 감정 조회
 export interface EmotionData {
@@ -13,7 +13,7 @@ export type EmotionResponse = BasicResponse<EmotionData>;
 // 감정 입력
 export interface EmotionInputRequest {
   emotionId: number;
-  childEmotions: number[];
+  childEmotions: EmotionId[];
 }
 
 export interface EmotionInputData {
