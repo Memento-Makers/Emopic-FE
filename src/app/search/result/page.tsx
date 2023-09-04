@@ -30,7 +30,7 @@ const initDict = () => {
 };
 
 // user_id 에 맞는 사진만 필터링 해서 가져옴
-const user_id = 2; // TODO: 더미 user_id 사용중
+const user_id = process.env.NEXT_PUBLIC_DUMMY_USER_ID; // TODO: 더미 user_id 사용중
 const defaultFilter = () => {
   return 'user_id:' + user_id;
 };

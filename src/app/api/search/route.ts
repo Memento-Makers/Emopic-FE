@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import API, { MatchFilter } from '@searchkit/api';
 
+// NEXT_PUBLIC_AI_SEARCH_URL
+
 const apiClient = API(
   {
     connection: {
-      host: 'http://34.64.97.214:9200/',
+      host: process.env.NEXT_PUBLIC_AI_SEARCH_URL,
     },
     search_settings: {
       highlight_attributes: ['caption', 'class_list'], // 강조할 필드들
