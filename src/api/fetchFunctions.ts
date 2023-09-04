@@ -3,7 +3,6 @@
 import { BasicResponse } from '@/types';
 import { signOut } from 'next-auth/react';
 
-// TODO: Base URL 환경 변수로 등록하기, 우선 임시 주소 사용
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 async function errorException(response: Response) {
@@ -23,9 +22,8 @@ export const basicFetch = async <returnType>(
   endpoint: string
 ): Promise<BasicResponse<returnType>> => {
   try {
-    // 생략...
-    const response = await fetch(`${process.env.BASE_URL}${endpoint}`);
-    const responseData = (await response.json()) as BasicResponse<returnType>; // as를 사용해 타입을 명시
+    const response = await fetch(`${BASE_URL}${endpoint}`);
+    const responseData = (await response.json()) as BasicResponse<returnType>;
     if (response.ok) {
       return responseData;
     }
@@ -44,14 +42,11 @@ export const mutateFetch = async (
     // const user = await getUserServerSession();
     const response = await fetch(`${BASE_URL}${endpoint}`, {
       method: method ?? 'POST',
-      //   headers: user
-      //     ? {
-      //         Accept: 'application/json',
-      //         Authorization: `Bearer ${user?.user?.accessToken}`,
-      //       }
-      //     : {
-      //         Accept: 'application/json',
-      //       },
+      headers: {
+        // TODO: 인증 로직 추가 시, 헤더에 토큰 추가
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         ...bodyData,
       }),
