@@ -25,6 +25,7 @@ export interface CategoryAllRequest {
   size: number; // 받고 싶은 상위(사진이 많은 순) 클래스 개수
 }
 
+// TODO: 수정 필요
 export interface CategoryAllData {
   categories: CategoryInfo[];
 }
@@ -39,7 +40,7 @@ export interface CategoryDetailRequest {
   order?: string; // order가 선택적이므로 optional로 정의
 }
 
-export interface DetailedCategoryData {
+export interface CategoryDetailData {
   content: ImageInfo[];
   pageable: PaginationInfo;
   totalPages: number;
@@ -53,4 +54,4 @@ export interface DetailedCategoryData {
   empty: boolean;
 }
 
-export type DetailedCategoryResponse = BasicResponse<DetailedCategoryData>;
+export type DetailedCategoryResponse = BasicResponse<CategoryDetailData>;
