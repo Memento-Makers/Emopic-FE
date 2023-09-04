@@ -1,5 +1,3 @@
-import { basicFetch } from '@/api';
-
 export const uploadFile = async (signedUrl: string, file: File) => {
   const result = await fetch(signedUrl, {
     method: 'PUT',
