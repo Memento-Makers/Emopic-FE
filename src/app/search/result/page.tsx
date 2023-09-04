@@ -7,7 +7,7 @@ import {
   Hits,
   Configure,
   SearchBoxProps,
-} from 'react-instantsearch-hooks-web';
+} from 'react-instantsearch';
 import { Hit } from 'instantsearch.js';
 
 import Client from '@searchkit/instantsearch-client';
