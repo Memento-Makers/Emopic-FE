@@ -5,6 +5,7 @@ import {
   ImageSkeleton,
   PhotoDetailHeader,
   PhotoDetailHeaderSkeleton,
+  DetailBottomNavigationSkeleton,
 } from '@/components';
 import Image from 'next/image';
 
@@ -53,15 +54,20 @@ export default function DetailPage({ params }: { params: Params }) {
         )}
       </main>
 
-      <DetailBottomNavigation
-        photoId={parseInt(photoId)}
-        photoUrl={'/'}
-        emotionList={
-          data
-            ? [...data.emotions.main, ...data.emotions.sub]
-            : ([] as Emotion[])
-        }
-      />
+      {(!data || isLoading) && <DetailBottomNavigationSkeleton />}
+
+      {data && (
+        <DetailBottomNavigation
+          photoId={parseInt(photoId)}
+          photoUrl={'/'}
+          emotionList={
+            data
+              ? [...data.emotions.main, ...data.emotions.sub]
+              : ([] as Emotion[])
+          }
+          caption={data?.diaryContent as string}
+        />
+      )}
     </div>
   );
 }
