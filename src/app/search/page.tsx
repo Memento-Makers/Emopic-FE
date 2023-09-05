@@ -9,6 +9,7 @@ import {
 import { useMutation } from '@tanstack/react-query';
 import { fetchSignedURL, fetchCaption, fetchCategories } from '@/mocks';
 import { toast } from 'react-toastify';
+import Link from 'next/link';
 
 // TODO: 현재는 메인 페이지를 SearchPage 로 사용하고 있으나,
 // 이 후에 메인 페이지가 변화할 경우 플로팅 버튼과 관련된 로직을
@@ -65,14 +66,25 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative h-[100vh] flex flex-col">
       <BasicHeader profileImage="https://picsum.photos/200" />
       <FloatingButton
         handleFileChange={files => {
           handleFileChange(files);
         }}
       />
-      <main className="px-3">
+      <main className="px-3 flex-grow w-[100%]">
+        <Link href="/search/result" className=" cursor-text">
+          <div
+            className="w-[100%] flex items-center px-3 rounded-full 
+              border-[1px] border-solid h-[50px]  text-[18px] 
+              outline-none px-3 py-2 shadow-md 
+              transition ease-in duration-200 text-gray-400"
+          >
+            사진의 내용으로 검색해보세요.
+          </div>
+        </Link>
+
         {/* {categories.map((category, index) => (
             <>
               <PreviewList
