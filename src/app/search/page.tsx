@@ -10,6 +10,7 @@ import {
   PreviewListSkeleton,
 } from '@/components';
 import { toast } from 'react-toastify';
+
 import {
   useGetSignedURL,
   useGetCaption,
@@ -19,6 +20,9 @@ import {
 } from '@/api';
 import dayjs from 'dayjs';
 import { Fragment } from 'react';
+
+import Link from 'next/link';
+
 // TODO: 현재는 메인 페이지를 SearchPage 로 사용하고 있으나,
 // 이 후에 메인 페이지가 변화할 경우 플로팅 버튼과 관련된 로직을
 // 해당 페이지로 옮겨야 한다.
@@ -78,12 +82,7 @@ export default function SearchPage() {
         toast(<AfterFileUploadToastContent files={files} />, {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
-
-        // TODO: 확인용 콘솔, API 연결 후 지우기
-        console.log('업로드 완료');
       } catch (error) {
-        console.log('error', error);
-
         toast.error('파일을 업로드하는데 문제가 발생하였습니다.', {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
@@ -100,6 +99,17 @@ export default function SearchPage() {
         }}
       />
       <main className="px-3 flex-grow w-[100%]">
+        <Link href="/search/result" className=" cursor-text">
+          <div
+            className="w-[100%] flex items-center px-3 rounded-full 
+              border-[1px] border-solid h-[50px]  text-[18px] 
+              outline-none px-3 py-2 shadow-md 
+              transition ease-in duration-200 text-gray-400 mb-[24px]"
+          >
+            사진의 내용으로 검색해보세요.
+          </div>
+        </Link>
+
         {isCategoryLoading &&
           Array.from({ length: 6 }).map((_, index) => (
             <PreviewListSkeleton key={`preview/skeleton/${index}`} />
@@ -115,9 +125,7 @@ export default function SearchPage() {
                 categoryId={categoryId}
                 count={count}
               />
-              {index < categoryData!.categories.length - 1 && (
-                <Spacer size={24} key={`${categoryId}/${name}/${index}`} />
-              )}
+              <Spacer size={24} key={`${categoryId}/${name}/${index}`} />
             </Fragment>
           ))}
       </main>
