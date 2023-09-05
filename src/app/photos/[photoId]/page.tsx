@@ -14,7 +14,7 @@ interface Params {
 
 import { useDetailPhoto } from '@/api';
 import dayjs from 'dayjs';
-import { EmotionId } from '@/types';
+import { Emotion } from '@/types';
 
 export default function DetailPage({ params }: { params: Params }) {
   const { photoId } = params;
@@ -59,7 +59,7 @@ export default function DetailPage({ params }: { params: Params }) {
         emotionList={
           data
             ? [...data.emotions.main, ...data.emotions.sub]
-            : ([] as EmotionId[])
+            : ([] as Emotion[])
         }
       />
     </div>
