@@ -1,12 +1,16 @@
+import { CSSProperties } from 'react';
+
 interface ImageSkeletonProps {
   width: number;
   height?: number;
+  style?: CSSProperties;
 }
 
-const ImageSkeleton = ({ width, height }: ImageSkeletonProps) => {
+const ImageSkeleton = ({ width, height, style }: ImageSkeletonProps) => {
   return (
     <div
       className={`flex items-center justify-center w-[${width}px] h-[${height}px] bg-gray-300 rounded dark:bg-gray-700 flex-shrink-0`}
+      style={{ ...style }}
     >
       <svg
         className="w-10 h-10 text-gray-200 dark:text-gray-600"
