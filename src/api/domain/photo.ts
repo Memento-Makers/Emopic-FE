@@ -1,8 +1,8 @@
 import { basicFetch, mutateFetch } from '../fetchFunctions';
 import {
-  IndividualPhotoResponse,
   EmotionInputRequest,
   IndividualPhotoData,
+  EmotionInputData,
 } from '@/types';
 
 export const photoAPI = {
@@ -28,7 +28,10 @@ export const photoAPI = {
     return result.data;
   },
   // 감정 입력
-  addEmotion: async (photoId: number, emotion: EmotionInputRequest) => {
+  addEmotion: async (
+    photoId: number,
+    emotion: EmotionInputRequest
+  ): Promise<EmotionInputData> => {
     const result = await mutateFetch(
       `api/v1/photos/${photoId}/emotions`,
       'POST',
