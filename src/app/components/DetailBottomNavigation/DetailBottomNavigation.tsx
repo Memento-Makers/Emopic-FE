@@ -4,21 +4,21 @@ import { HiOutlinePhoto } from 'react-icons/hi2';
 import { BsFillJournalBookmarkFill } from 'react-icons/bs';
 import { RiEmotionHappyLine } from 'react-icons/ri';
 import { GrClose } from 'react-icons/gr';
-
 import {
   NavigationButton,
   ModalDialog,
   EmotionModalContent,
 } from '@/components';
-
 import { useModal } from '@/hooks';
 import { useRouter } from 'next/navigation';
-import { EmotionId } from '@/types';
+import { Emotion, EmotionId } from '@/types';
+import useSaveEmotion from '@/api/queries/domain/photo/hooks/useSaveEmotion';
+import { useEffect, useState } from 'react';
 
 interface DetailBottomNavigationProps {
   photoId: number;
   photoUrl: string; // 사진 url
-  emotionList: EmotionId[]; // 선택되어 있는 감정 리스트
+  emotionList: Emotion[]; // 선택되어 있는 감정 리스트
 }
 
 const DetailBottomNavigation = ({
@@ -28,17 +28,49 @@ const DetailBottomNavigation = ({
 }: DetailBottomNavigationProps) => {
   const router = useRouter();
 
-  const { dialogRef, openDialog, closeDialog } = useModal();
+  const saveEmotion = useSaveEmotion();
 
-  const handleSubmit = ({
+  const emotionIdList = emotionList.map(({ emotionId }) => emotionId);
+
+  // 초기 상태를 저장할 state
+  const [initialMap, setInitialMap] = useState(new Map<EmotionId, boolean>());
+
+  // emotionMap 상태
+  const [emotionMap, setEmotionMap] = useState(new Map<EmotionId, boolean>());
+
+  const { dialogRef, openDialog, closeDialog } = useModal({
+    closeCallback: () => {
+      setEmotionMap(initialMap);
+    },
+  });
+
+  useEffect(() => {
+    const newInitialMap = new Map();
+    emotionList.forEach(({ emotionId }) => newInitialMap.set(emotionId, true));
+    setInitialMap(new Map(newInitialMap));
+    setEmotionMap(new Map(newInitialMap)); // 초기 상태를 emotionMap에도 설정
+  }, [emotionList]);
+
+  const handleSubmit = async ({
     mainEmotion,
     subEmotion,
   }: {
     mainEmotion: EmotionId;
     subEmotion: EmotionId[];
-  }): void => {
-    console.log(mainEmotion, subEmotion);
-    closeDialog();
+  }) => {
+    const { photoEmotionIds } = await saveEmotion.mutateAsync({
+      photoId,
+      emotion: { emotionId: mainEmotion, childEmotions: [...subEmotion] },
+    });
+
+    // 콜백 실행 안함
+    closeDialog(false);
+
+    // 해당 데이터로 map을 초기화 한다.
+    const newInitialMap = new Map();
+    photoEmotionIds.forEach(emotionId => newInitialMap.set(emotionId, true));
+    setInitialMap(new Map(newInitialMap));
+    setEmotionMap(new Map(newInitialMap)); // 초기 상태를 emotionMap에도 설정
   };
 
   return (
@@ -65,10 +97,17 @@ const DetailBottomNavigation = ({
         />
       </div>
 
-      <ModalDialog ref={dialogRef}>
+      <ModalDialog
+        ref={dialogRef}
+        closeCallback={() => {
+          closeDialog(true);
+        }}
+      >
         <div className="modal-action w-fit h-fit absolute right-[10px] top-[5px]">
           <button
-            onClick={closeDialog}
+            onClick={() => {
+              closeDialog(true);
+            }}
             className="btn bg-transparent border-none text-[30px] text-gray-400"
           >
             <GrClose />
@@ -76,8 +115,9 @@ const DetailBottomNavigation = ({
         </div>
         <div>
           <EmotionModalContent
-            emotionList={emotionList}
             handleSubmit={handleSubmit}
+            emotionMap={emotionMap}
+            setEmotionMap={setEmotionMap}
           />
         </div>
       </ModalDialog>
