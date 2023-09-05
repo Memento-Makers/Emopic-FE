@@ -5,10 +5,22 @@ import {
   FloatingButton,
   BeforeUploadToastContent,
   AfterFileUploadToastContent,
+  PreviewList,
+  Spacer,
+  PreviewListSkeleton,
 } from '@/components';
-import { useMutation } from '@tanstack/react-query';
-import { fetchSignedURL, fetchCaption, fetchCategories } from '@/mocks';
 import { toast } from 'react-toastify';
+
+import {
+  useGetSignedURL,
+  useGetCaption,
+  useGetClassification,
+  uploadFile,
+  useCategoryAll,
+} from '@/api';
+import dayjs from 'dayjs';
+import { Fragment } from 'react';
+
 import Link from 'next/link';
 
 // TODO: 현재는 메인 페이지를 SearchPage 로 사용하고 있으나,
@@ -16,9 +28,12 @@ import Link from 'next/link';
 // 해당 페이지로 옮겨야 한다.
 
 export default function SearchPage() {
-  const uploadMutation = useMutation(fetchSignedURL);
-  const captionMutation = useMutation(fetchCaption);
-  const categoriesMutation = useMutation(fetchCategories);
+  const getSignedURLMutation = useGetSignedURL();
+  const getCaption = useGetCaption();
+  const getClassification = useGetClassification();
+
+  // TODO: 추후에 SSR 적용하기
+  const { data: categoryData, isLoading: isCategoryLoading } = useCategoryAll();
 
   const handleFileChange = async (files: File[]) => {
     if (files.length > 0) {
@@ -33,20 +48,33 @@ export default function SearchPage() {
       );
 
       try {
-        const uploadPromises = files.map(async file => {
+        const uploadPromises = files.map(async (file, index) => {
           // fetchSignedURL 실행
-          const {
-            data: { signedUrl, photoId },
-          } = await uploadMutation.mutateAsync(file.name);
+          const fileName =
+            dayjs().format('YYYYMMDDHHmmssSSS') +
+            process.env.NEXT_PUBLIC_DUMMY_USER_ID +
+            index;
+
+          const { photoId, signedUrl } = await getSignedURLMutation.mutateAsync(
+            fileName
+          );
+
+          console.log('signedUrl', signedUrl);
+          console.log('photoId', photoId);
 
           // 실제 파일 업로드 로직
-          // await uploadFile(signedUrl, file);
+          await uploadFile(signedUrl, file);
 
-          // fetchCaption과 fetch Categories 실행
-          const captionData = await captionMutation.mutateAsync(photoId);
-          const categoriesData = await categoriesMutation.mutateAsync(photoId);
+          // 이미지 캡션 요청
+          const { caption } = await getCaption.mutateAsync(photoId);
 
-          return { captionData, categoriesData, photoId };
+          // 이미지 분류 요청
+          const { categories } = await getClassification.mutateAsync(photoId);
+
+          console.log('caption', caption);
+          console.log('categories', categories);
+
+          return { caption, categories, photoId };
         });
 
         const results = await Promise.all(uploadPromises);
@@ -54,9 +82,6 @@ export default function SearchPage() {
         toast(<AfterFileUploadToastContent files={files} />, {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
-
-        // TODO: 확인용 콘솔, API 연결 후 지우기
-        console.log('업로드 완료', results);
       } catch (error) {
         toast.error('파일을 업로드하는데 문제가 발생하였습니다.', {
           position: toast.POSITION.BOTTOM_RIGHT,
@@ -79,24 +104,30 @@ export default function SearchPage() {
             className="w-[100%] flex items-center px-3 rounded-full 
               border-[1px] border-solid h-[50px]  text-[18px] 
               outline-none px-3 py-2 shadow-md 
-              transition ease-in duration-200 text-gray-400"
+              transition ease-in duration-200 text-gray-400 mb-[24px]"
           >
             사진의 내용으로 검색해보세요.
           </div>
         </Link>
 
-        {/* {categories.map((category, index) => (
-            <>
+        {isCategoryLoading &&
+          Array.from({ length: 6 }).map((_, index) => (
+            <PreviewListSkeleton key={`preview/skeleton/${index}`} />
+          ))}
+
+        {!isCategoryLoading &&
+          categoryData!.categories &&
+          categoryData!.categories.map(({ categoryId, name, count }, index) => (
+            <Fragment key={categoryId}>
               <PreviewList
-                key={index}
-                images={category.images}
-                title={category.title}
+                key={`${categoryId}/${name}`}
+                title={name}
+                categoryId={categoryId}
+                count={count}
               />
-              {index < categories.length - 1 && (
-                <Spacer size={24} key={index} />
-              )}
-            </>
-          ))} */}
+              <Spacer size={24} key={`${categoryId}/${name}/${index}`} />
+            </Fragment>
+          ))}
       </main>
     </div>
   );

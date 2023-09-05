@@ -5,15 +5,16 @@
 // 2 : 보통
 // 3 : 부정
 // 301: 슬픔, 302 : 화남, 303: 부끄러움, 304: 피곤함, 305: 초조한
-
+import { EmotionData } from '@/types';
 export interface Emotion {
   // TODO: 감정 데이터 확정 시, 재정의 해야함 (각각 unique한 데이터로 저장될 듯)
-  emotionId: number;
+  emotionId: EmotionId;
 }
 
 // 각 카테고리의 정보를 담는 인터페이스
 export interface CategoryInfo {
-  category: string;
+  categoryId: number;
+  name: string;
   count: number;
   thumbnail: string;
 }
@@ -22,8 +23,7 @@ export interface CategoryInfo {
 export interface ImageInfo {
   photoId: number;
   signedUrl: string;
-  emotionId: number;
-  name: string;
+  emotions: EmotionData;
 }
 
 export type EmotionId =

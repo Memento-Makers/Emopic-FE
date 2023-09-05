@@ -1,20 +1,46 @@
+'use client';
+
 import { PreviewListItem } from './PreviewListItem';
 import { PreviewHeader } from './PreviewHeader';
+import { useCategoryDetail } from '@/api';
+import { ImageSkeleton } from '@/components';
 
 export interface PreviewListProps {
-  images: string[];
   title: string;
+  categoryId: number;
+  count: number;
 }
 
-export const PreviewList = ({ images, title }: PreviewListProps) => {
+const PreviewList = ({ title, categoryId, count }: PreviewListProps) => {
+  const { data, isLoading } = useCategoryDetail(categoryId);
+
   return (
     <section>
-      <PreviewHeader title={title} />
-      <div className="carousel carousel-center rounded-box gap-[10px] overflow-scroll w-[100%]">
-        {images.map(image => (
-          <PreviewListItem key={image} imageUrl={image} />
-        ))}
+      <PreviewHeader title={title} count={count} />
+
+      <div className=" flex gap-[10px] overflow-hidden">
+        {isLoading &&
+          Array.from({ length: 3 }).map((_, index) => (
+            <ImageSkeleton
+              key={`${categoryId}/skeleton/${index}`}
+              width={150}
+              height={150}
+            />
+          ))}
+      </div>
+
+      <div className="carousel carousel-center gap-[10px] overflow-scroll w-[100%]">
+        {data &&
+          data.content.map(({ signedUrl, photoId }) => (
+            <PreviewListItem
+              key={`${categoryId}/${photoId}`}
+              imageUrl={signedUrl}
+              photoId={photoId}
+            />
+          ))}
       </div>
     </section>
   );
 };
+
+export default PreviewList;
