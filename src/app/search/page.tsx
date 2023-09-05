@@ -59,9 +59,6 @@ export default function SearchPage() {
             fileName
           );
 
-          console.log('signedUrl', signedUrl);
-          console.log('photoId', photoId);
-
           // 실제 파일 업로드 로직
           await uploadFile(signedUrl, file);
 
@@ -70,9 +67,6 @@ export default function SearchPage() {
 
           // 이미지 분류 요청
           const { categories } = await getClassification.mutateAsync(photoId);
-
-          console.log('caption', caption);
-          console.log('categories', categories);
 
           return { caption, categories, photoId };
         });
