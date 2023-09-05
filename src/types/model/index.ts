@@ -9,6 +9,7 @@ import { EmotionData } from '@/types';
 export interface Emotion {
   // TODO: 감정 데이터 확정 시, 재정의 해야함 (각각 unique한 데이터로 저장될 듯)
   emotionId: EmotionId;
+  name: string;
 }
 
 // 각 카테고리의 정보를 담는 인터페이스

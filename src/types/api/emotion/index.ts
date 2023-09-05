@@ -17,7 +17,7 @@ export interface EmotionInputRequest {
 }
 
 export interface EmotionInputData {
-  photoEmotionId: number;
+  photoEmotionIds: EmotionId[];
 }
 
 export type EmotionInputResponse = BasicResponse<EmotionInputData>;
