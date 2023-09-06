@@ -5,6 +5,12 @@ interface PhotoKeyType {
   caption: (userId: number, photoId: number) => readonly string[];
   detail: (userId: number, photoId: number) => readonly string[];
   saveEmotion: (userId: number, photoId: number) => readonly string[];
+  getDiary: (userId: number, photoId: number) => readonly string[];
+  makeDiary: (
+    userId: number,
+    photoId: number,
+    content: string
+  ) => readonly string[];
 }
 
 export const photoKeys: PhotoKeyType = {
@@ -16,4 +22,8 @@ export const photoKeys: PhotoKeyType = {
     ['detail', userId.toString(), photoId.toString()] as const,
   saveEmotion: (userId, photoId) =>
     ['emotion', userId.toString(), photoId.toString()] as const,
+  getDiary: (userId, photoId) =>
+    ['diary', userId.toString(), photoId.toString()] as const,
+  makeDiary: (userId, photoId, content) =>
+    ['diary', userId.toString(), photoId.toString(), content] as const,
 };
