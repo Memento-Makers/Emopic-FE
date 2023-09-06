@@ -1,9 +1,8 @@
 'use client';
 
-import { PiCaretLeftLight } from 'react-icons/pi';
-import Link from 'next/link';
+import { PiCaretLeftBold } from 'react-icons/pi';
 import { useRouter } from 'next/navigation';
-import { DiaryButton } from '@/components';
+
 export interface PhotoDetailHeaderProps {
   categories: string[]; // 분류 결과 클래스 (3개 까지)
   uploadDate: string; // 사진 업로드 시간
@@ -21,7 +20,7 @@ const PhotoDetailHeader = ({
         className="button text-[48px] text-primary absolute left-2"
         onClick={() => router.push('/search')}
       >
-        <PiCaretLeftLight />
+        <PiCaretLeftBold />
       </button>
 
       <div className=" flex justify-between items-center flex-col">
