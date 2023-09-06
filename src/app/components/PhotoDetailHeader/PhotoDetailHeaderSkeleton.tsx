@@ -14,7 +14,7 @@ const PhotoDetailHeaderSkeleton = () => {
       </button>
 
       <div className=" flex justify-between items-center flex-col">
-        <ul className="flex items-center gap-2 mb-3">
+        <ul className="flex items-center gap-2 mb-3 animate-pulse">
           <div className="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-[50px]"></div>
           <div className="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-[50px]"></div>
           <div className="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-[50px]"></div>
