@@ -15,19 +15,19 @@ const AfterFileUploadToastContent = ({
           <img
             src={imageUrls[0]}
             alt="img-0"
-            className=" object-cover w-full h-full"
+            className=" object-cover w-200 h-100"
           />
         </div>
       );
     } else if (imageCount === 2) {
       return (
-        <div className="w-200 h-80 grid grid-cols-2 gap-2">
+        <div className="w-200 grid grid-cols-2 gap-2">
           {imageUrls.slice(0, 2).map((url, index) => (
             <div key={index} className="relative aspect-w-1 aspect-h-1">
               <img
                 src={url}
                 alt={`img-${index}`}
-                className="object-cover  inset-0 w-full h-full"
+                className="object-cover  inset-0 w-100 h-100"
               />
             </div>
           ))}
@@ -35,12 +35,12 @@ const AfterFileUploadToastContent = ({
       );
     } else if (imageCount === 3) {
       return (
-        <div className="w-200 grid grid-rows-2 gap-2 h-100">
+        <div className="w-200 grid grid-rows-2 gap-2">
           <div className="row-span-1 relative aspect-w-1 aspect-h-1">
             <img
               src={imageUrls[0]}
               alt="img-0"
-              className="object-cover inset-0 w-full h-full"
+              className="object-cover inset-0 w-200 h-100"
             />
           </div>
           <div className="grid grid-cols-2 row-span-1 gap-2">
@@ -49,7 +49,7 @@ const AfterFileUploadToastContent = ({
                 <img
                   src={url}
                   alt={`img-${index}`}
-                  className="object-cover  inset-0 w-full h-full"
+                  className="object-cover inset-0 w-100 h-100"
                 />
               </div>
             ))}
