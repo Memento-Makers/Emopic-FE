@@ -33,7 +33,8 @@ export default function SearchPage() {
   const getClassification = useGetClassification();
 
   // TODO: 추후에 SSR 적용하기
-  const { data: categoryData, isLoading: isCategoryLoading } = useCategoryAll();
+  const { data: categoryData, isLoading: isCategoryLoading } =
+    useCategoryAll(10);
 
   const handleFileChange = async (files: File[]) => {
     if (files.length > 0) {
