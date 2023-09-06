@@ -32,7 +32,7 @@ export default function DetailPage({ params }: { params: Params }) {
         />
       )}
 
-      <main className="bg-neutral flex flex-grow items-center justify-center">
+      <main className="bg-neutral flex flex-grow items-center justify-center max-h-[100vh]">
         {(isLoading || !data) && (
           <ImageSkeleton
             width={500}
@@ -50,6 +50,7 @@ export default function DetailPage({ params }: { params: Params }) {
               (max-width: 1200px) 50vw,
               33vw"
             style={{ width: '100%' }}
+            className="max-h-[80vh]"
           />
         )}
       </main>

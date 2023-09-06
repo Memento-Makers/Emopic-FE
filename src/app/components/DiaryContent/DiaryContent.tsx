@@ -31,7 +31,7 @@ const DiaryContent = ({
 
   return (
     <div className={`p-[20px] ${className}`}>
-      <div className=" flex items-center gap-[5px]">
+      <div className=" flex items-center gap-[5px] flex-grow">
         <h3 className=" text-primary font-bold text-[24px]">
           Today's Story by
         </h3>

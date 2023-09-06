@@ -41,7 +41,7 @@ export default function DiaryPage({ params }: { params: Params }) {
             sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-            style={{ width: '100%' }}
+            style={{ width: '100%', maxHeight: '500px' }}
           />
         )}
         {(!data || !diaryData || isLoading) && (
@@ -57,7 +57,7 @@ export default function DiaryPage({ params }: { params: Params }) {
                 ? [...data.emotions.main, ...data.emotions.sub]
                 : ([] as Emotion[])
             }
-            className="absolute z-[999] top-[250px] bg-white rounded-t-[15px] w-[100%]"
+            className="absolute z-[999] top-[250px] bg-white rounded-t-[15px] w-[100%] min-h-[500px]"
             photoId={parseInt(diaryId)}
           />
         )}
