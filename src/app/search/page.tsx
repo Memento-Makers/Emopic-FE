@@ -112,17 +112,21 @@ export default function SearchPage() {
 
         {!isCategoryLoading &&
           categoryData!.categories &&
-          categoryData!.categories.map(({ categoryId, name, count }, index) => (
-            <Fragment key={categoryId}>
-              <PreviewList
-                key={`${categoryId}/${name}`}
-                title={name}
-                categoryId={categoryId}
-                count={count}
-              />
-              <Spacer size={24} key={`${categoryId}/${name}/${index}`} />
-            </Fragment>
-          ))}
+          categoryData!.categories.map(({ categoryId, name, count }, index) => {
+            if (categoryId === 80) return <div key={categoryId}></div>;
+
+            return (
+              <Fragment key={categoryId}>
+                <PreviewList
+                  key={`${categoryId}/${name}`}
+                  title={name}
+                  categoryId={categoryId}
+                  count={count}
+                />
+                <Spacer size={24} key={`${categoryId}/${name}/${index}`} />
+              </Fragment>
+            );
+          })}
       </main>
     </div>
   );
