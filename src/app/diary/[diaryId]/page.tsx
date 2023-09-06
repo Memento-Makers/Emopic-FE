@@ -33,7 +33,7 @@ export default function DiaryPage({ params }: { params: Params }) {
         )}
 
         {data && (
-          <Image
+          <img
             src={data?.signedUrl}
             width={200}
             height={160}
