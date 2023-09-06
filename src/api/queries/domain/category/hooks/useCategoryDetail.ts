@@ -4,7 +4,6 @@ import { CategoryDetailData } from '@/types';
 
 const useCategoryDetail = (categoryId: number, size?: number) => {
   const userId = parseInt(process.env.NEXT_PUBLIC_DUMMY_USER_ID as string) || 1;
-  // const queryClient = useQueryClient();
 
   return useQuery<CategoryDetailData>(
     categoryKeys.requestDetail(categoryId, userId),

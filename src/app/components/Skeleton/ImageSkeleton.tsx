@@ -9,7 +9,7 @@ interface ImageSkeletonProps {
 const ImageSkeleton = ({ width, height, style }: ImageSkeletonProps) => {
   return (
     <div
-      className={`flex items-center justify-center w-[${width}px] h-[${height}px] bg-gray-300 rounded dark:bg-gray-700 flex-shrink-0`}
+      className={`animate-pulse flex items-center justify-center w-[${width}px] h-[${height}px] bg-gray-300 rounded dark:bg-gray-700 flex-shrink-0`}
       style={{ ...style }}
     >
       <svg

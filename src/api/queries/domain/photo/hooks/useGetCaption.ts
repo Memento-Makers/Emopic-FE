@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { photoAPI } from '@/api';
-import { photoKeys } from '@/api';
+import { photoAPI, photoKeys } from '@/api';
 
 const useGetCaption = () => {
   const userId = parseInt(process.env.NEXT_PUBLIC_DUMMY_USER_ID as string) || 1;

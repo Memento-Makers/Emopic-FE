@@ -10,3 +10,8 @@ export interface DiaryData {
 }
 
 export type DiaryResponse = BasicResponse<DiaryData>;
+
+// 일기장 조회
+export interface DiaryContentData {
+  diary: string;
+}
