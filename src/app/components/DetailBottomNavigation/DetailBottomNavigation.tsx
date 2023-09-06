@@ -12,10 +12,9 @@ import {
 import { useModal } from '@/hooks';
 import { useRouter } from 'next/navigation';
 import { Emotion, EmotionId } from '@/types';
-import useSaveEmotion from '@/api/queries/domain/photo/hooks/useSaveEmotion';
 import { useEffect, useState } from 'react';
 import { EmotionDataMap } from '@/model';
-import { getOpenAIResponse } from '@/api';
+import { getOpenAIResponse, useMakeDiary, useSaveEmotion } from '@/api';
 import { toast } from 'react-toastify';
 
 interface DetailBottomNavigationProps {
@@ -32,10 +31,11 @@ const DetailBottomNavigation = ({
   caption,
 }: DetailBottomNavigationProps) => {
   const router = useRouter();
-
   const saveEmotion = useSaveEmotion();
+  const makeDiary = useMakeDiary();
 
-  const emotionIdList = emotionList.map(({ emotionId }) => emotionId);
+  // 서버 통신 중 다시 요청이 가지 않도록 한다.
+  const [isLoading, setIsLoading] = useState(false);
 
   // 초기 상태를 저장할 state
   const [initialMap, setInitialMap] = useState(new Map<EmotionId, boolean>());
@@ -63,35 +63,67 @@ const DetailBottomNavigation = ({
     mainEmotion: EmotionId;
     subEmotion: EmotionId[];
   }) => {
-    const { photoEmotionIds } = await saveEmotion.mutateAsync({
-      photoId,
-      emotion: { emotionId: mainEmotion, childEmotions: [...subEmotion] },
-    });
+    if (isLoading) {
+      toast('이미 일기장을 생성하고 있습니다. 잠시 후에 시도해주세요.', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
 
-    // 콜백 실행 안함
-    closeDialog(false);
+      closeDialog(true);
+      return;
+    }
 
-    // 해당 데이터로 map을 초기화 한다.
-    const newInitialMap = new Map();
-    photoEmotionIds.forEach(emotionId => newInitialMap.set(emotionId, true));
-    setInitialMap(new Map(newInitialMap));
-    setEmotionMap(new Map(newInitialMap)); // 초기 상태를 emotionMap에도 설정
+    setIsLoading(true);
 
-    toast('감정 입력 완료! 일기장 내용을 생성합니다.', {
-      position: toast.POSITION.BOTTOM_RIGHT,
-    });
+    try {
+      const { photoEmotionIds } = await saveEmotion.mutateAsync({
+        photoId,
+        emotion: { emotionId: mainEmotion, childEmotions: [...subEmotion] },
+      });
 
-    // 일기장 작성하기
-    // 1. 감정을 string 으로 변환
-    const emotions = photoEmotionIds.map(id => EmotionDataMap.get(id));
+      // 콜백 실행 안함
+      closeDialog(false);
 
-    // 2. openAI를 통해 뭐시기를 만든다.
-    const openAiRes = await getOpenAIResponse(emotions as string[], caption);
-    const diaryContent = openAiRes.choices[0].message.content;
+      // 해당 데이터로 map을 초기화 한다.
+      const newInitialMap = new Map();
+      photoEmotionIds.forEach(emotionId => newInitialMap.set(emotionId, true));
+      setInitialMap(new Map(newInitialMap));
+      setEmotionMap(new Map(newInitialMap)); // 초기 상태를 emotionMap에도 설정
 
-    // 3. 감정추가 API 보내고
+      toast('감정 입력 완료! 일기장 내용을 생성합니다.', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
 
-    // 4. 토스트도 하나 띄운다.
+      // 일기장 작성하기
+
+      // 1. 감정을 string 으로 변환
+      const emotions = photoEmotionIds.map(id => EmotionDataMap.get(id));
+
+      // 2. openAI를 통해 일기장 내용을 만든다.
+      const openAiRes = await getOpenAIResponse(emotions as string[], caption);
+      const diaryContent = openAiRes.choices[0].message.content;
+
+      // 3. 일기장 추가 API를 보낸다.
+      const { data } = await makeDiary.mutateAsync({
+        photoId,
+        content: diaryContent,
+      });
+
+      // 4. 토스트도 하나 띄운다.
+      toast(
+        <div className=" max-w-[300px]">
+          <p className=" font-bold">일기장 저장 완료!</p>
+          <p className=" line-clamp-3">{diaryContent}</p>
+        </div>,
+        {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        }
+      );
+    } catch (error) {
+      toast.error('네트워크에 문제가 생겼습니다.');
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false); // 로딩 완료
+    }
   };
 
   return (
