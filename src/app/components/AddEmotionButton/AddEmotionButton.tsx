@@ -17,6 +17,7 @@ interface AddEmotionButtonProps {
   caption: string;
   onLoadingChange: (isLoading: boolean) => void;
   setEmotions: Dispatch<SetStateAction<EmotionData>>;
+  setDiary: Dispatch<SetStateAction<string>>;
 }
 
 const AddEmotionButton = ({
@@ -25,6 +26,7 @@ const AddEmotionButton = ({
   caption,
   onLoadingChange,
   setEmotions,
+  setDiary,
 }: AddEmotionButtonProps) => {
   const saveEmotion = useSaveEmotion();
   const makeDiary = useMakeDiary();
@@ -130,8 +132,8 @@ const AddEmotionButton = ({
         position: toast.POSITION.BOTTOM_RIGHT,
       });
 
+      setDiary(diaryContent);
       onLoadingChange(false); // 로딩 완료 알림
-      router.refresh();
     } catch (error) {
       toast.error('네트워크에 문제가 생겼습니다.');
       setIsLoading(false);

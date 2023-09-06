@@ -24,6 +24,7 @@ const DiaryContent = ({
 }: DiaryContentProps) => {
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
   const [currentEmotion, setCurrentEmotion] = useState<EmotionData>(emotions);
+  const [currentDiary, setCurrentDiary] = useState<string>(diaryContent);
 
   const handleLoadingChange = (isLoading: boolean) => {
     setIsLoading(isLoading);
@@ -59,7 +60,7 @@ const DiaryContent = ({
           ></div>
         ))
       ) : (
-        <p className="text-[16px] leading-7">{diaryContent}</p>
+        <p className="text-[16px] leading-7">{currentDiary}</p>
       )}
 
       <Spacer size={20} />
@@ -70,9 +71,10 @@ const DiaryContent = ({
           <AddEmotionButton
             emotionList={emotionList}
             photoId={photoId}
-            caption={diaryContent}
+            caption={currentDiary}
             onLoadingChange={handleLoadingChange}
             setEmotions={setCurrentEmotion}
+            setDiary={setCurrentDiary}
           />
         </div>
 
