@@ -10,7 +10,7 @@ const useMakeDiary = () => {
       photoAPI.generateDiary(photoId, content),
     {
       onSuccess: (data, variables) => {
-        const { photoId, content } = variables; // 여기에서 content를 추출
+        const { photoId, content } = variables;
         queryClient.invalidateQueries(
           photoKeys.makeDiary(userId, photoId, content)
         );
