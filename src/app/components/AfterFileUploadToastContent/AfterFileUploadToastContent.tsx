@@ -11,7 +11,7 @@ const AfterFileUploadToastContent = ({
   const renderImages = () => {
     if (imageCount === 1) {
       return (
-        <div className="w-200 h-80 relative">
+        <div className="">
           <img
             src={imageUrls[0]}
             alt="img-0"
