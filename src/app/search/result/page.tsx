@@ -14,6 +14,7 @@ import Client from '@searchkit/instantsearch-client';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const searchClient = Client({
   url: '/api/search',
@@ -71,11 +72,12 @@ const HitView = ({ hit }: { hit: Hit }) => {
           onMouseLeave={() => setHover(false)}
           className="relative"
         >
-          <img
+          <Image
             src={signed_url}
             className={`${
               hover ? 'brightness-75' : 'brightness-100'
             } w-[100%] h-[200px] object-cover`}
+            alt="분류 이미지"
           />
           {hover && (
             <div className="absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50 line-clamp-3">
