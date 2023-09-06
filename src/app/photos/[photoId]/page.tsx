@@ -41,7 +41,7 @@ export default function DetailPage({ params }: { params: Params }) {
         )}
         {data && (
           // TODO: 데이터 정제 이후에 next/image로 바꾸기
-          <img
+          <Image
             src={data.signedUrl}
             width={200}
             height={160}
@@ -60,7 +60,7 @@ export default function DetailPage({ params }: { params: Params }) {
       {data && (
         <DetailBottomNavigation
           photoId={parseInt(photoId)}
-          photoUrl={'/'}
+          photoUrl={data.signedUrl}
           emotionList={
             data
               ? [...data.emotions.main, ...data.emotions.sub]
