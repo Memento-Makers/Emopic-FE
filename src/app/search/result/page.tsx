@@ -13,6 +13,7 @@ import { Hit } from 'instantsearch.js';
 import Client from '@searchkit/instantsearch-client';
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const searchClient = Client({
   url: '/api/search',
@@ -60,43 +61,45 @@ const HitView = ({ hit }: { hit: Hit }) => {
   // if (isNewDate) dateSet.add(key);
 
   return (
-    <div
-      className="card w-96 bg-base-100 shadow-xl my-[20px] cursor-pointer"
-      key={objectID}
-    >
-      <figure
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-        className="relative"
+    <Link href={`/photos/${objectID}`}>
+      <div
+        className="card w-96 bg-base-100 shadow-xl my-[20px] cursor-pointer"
+        key={objectID}
       >
-        <img
-          src={signed_url}
-          className={`${
-            hover ? 'brightness-75' : 'brightness-100'
-          } w-[100%] h-[200px] object-cover`}
-        />
-        {hover && (
-          <div className="absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50 line-clamp-3">
-            {caption}
+        <figure
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+          className="relative"
+        >
+          <img
+            src={signed_url}
+            className={`${
+              hover ? 'brightness-75' : 'brightness-100'
+            } w-[100%] h-[200px] object-cover`}
+          />
+          {hover && (
+            <div className="absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50 line-clamp-3">
+              {caption}
+            </div>
+          )}
+        </figure>
+        <div className="card-body">
+          <div className=" flex gap-2">
+            {class_list &&
+              class_list.map((image_class: string) => (
+                <div
+                  key={`${objectID}/${image_class}`}
+                  className="badge badge-outline badge-primary"
+                >
+                  {image_class}
+                </div>
+              ))}
           </div>
-        )}
-      </figure>
-      <div className="card-body">
-        <div className=" flex gap-2">
-          {class_list &&
-            class_list.map((image_class: string) => (
-              <div
-                key={`${objectID}/${image_class}`}
-                className="badge badge-outline badge-primary"
-              >
-                {image_class}
-              </div>
-            ))}
+          <p>{formattedDate}</p>
+          {/* <p>{caption}</p> */}
         </div>
-        <p>{formattedDate}</p>
-        {/* <p>{caption}</p> */}
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -111,7 +114,7 @@ export default function SearchPage() {
           searchClient={searchClient}
           routing
         >
-          <Configure hitsPerPage={15} filters={defaultFilter()} />
+          <Configure hitsPerPage={15} />
           <div className="container">
             <div
               className="w-[100%] flex items-center px-3 rounded-full 
