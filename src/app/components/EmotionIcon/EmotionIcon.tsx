@@ -5,12 +5,12 @@ export interface EmotionIconProps {
   emotionId: EmotionId;
 }
 
-export const EmotionIcon = ({ emotionId }: EmotionIconProps) => {
+const EmotionIcon = ({ emotionId }: EmotionIconProps) => {
   const emotionClass = emotionId.toString()[0];
 
   return (
     <div
-      className={`flex flex-col items-center w-[120px] rounded-lg text-neutral p-[10px] box-border ${
+      className={`flex flex-col flex-shrink-0 items-center w-[120px] rounded-lg text-neutral p-[10px] box-border ${
         emotionClass === '1'
           ? 'bg-yellow-100'
           : emotionClass === '2'
@@ -23,3 +23,5 @@ export const EmotionIcon = ({ emotionId }: EmotionIconProps) => {
     </div>
   );
 };
+
+export default EmotionIcon;
