@@ -19,7 +19,7 @@ const PhotoDetailHeader = ({
     <header className=" top-0 flex justify-center items-center p-3 w-[100%] relative">
       <button
         className="button text-[48px] text-primary absolute left-2"
-        onClick={() => router.back()}
+        onClick={() => router.push('/search')}
       >
         <PiCaretLeftLight />
       </button>
