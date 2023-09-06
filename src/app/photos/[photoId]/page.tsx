@@ -41,7 +41,7 @@ export default function DetailPage({ params }: { params: Params }) {
         )}
         {data && (
           // TODO: 데이터 정제 이후에 next/image로 바꾸기
-          <Image
+          <img
             src={data.signedUrl}
             width={200}
             height={160}

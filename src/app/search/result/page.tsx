@@ -72,7 +72,7 @@ const HitView = ({ hit }: { hit: Hit }) => {
           onMouseLeave={() => setHover(false)}
           className="relative"
         >
-          <Image
+          <img
             src={signed_url}
             className={`${
               hover ? 'brightness-75' : 'brightness-100'
