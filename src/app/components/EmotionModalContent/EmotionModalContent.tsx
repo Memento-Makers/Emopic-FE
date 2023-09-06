@@ -1,16 +1,14 @@
 'use client';
 
-import { Spacer } from '..';
-import EmotionIconButton from './EmotionIconButton';
-import { useState } from 'react';
+import { Spacer, EmotionIconButton } from '@/components';
+import { SetStateAction, Dispatch } from 'react';
 import { EmotionId } from '@/types';
 
 const mainEmotionIds: EmotionId[] = [1, 2, 3];
 const subEmotionIdsGroup1: EmotionId[] = [101, 102, 103, 104, 105];
 const subEmotionIdsGroup3: EmotionId[] = [301, 302, 303, 304, 305];
 
-export interface EmotionModalContentProps {
-  emotionList: EmotionId[]; // 현재 선택된 감정 리스트
+interface EmotionModalContentProps {
   handleSubmit: ({
     mainEmotion,
     subEmotion,
@@ -18,25 +16,17 @@ export interface EmotionModalContentProps {
     mainEmotion: EmotionId;
     subEmotion: EmotionId[];
   }) => void;
+  emotionMap: Map<EmotionId, boolean>;
+  setEmotionMap: Dispatch<SetStateAction<Map<EmotionId, boolean>>>;
 }
 
 const EmotionModalContent = ({
-  emotionList,
   handleSubmit,
+  emotionMap,
+  setEmotionMap,
 }: EmotionModalContentProps) => {
-  const [emotionMap, setEmotionMap] = useState(new Map());
-
-  // 초기 상태 설정 (옵션)
-  useState(() => {
-    if (emotionList) {
-      const initialMap = new Map();
-      emotionList.forEach(emotion => initialMap.set(emotion, true));
-      setEmotionMap(initialMap);
-    }
-  });
-
   // Main 감정 선택
-  const handleMainEmotionId = (id: EmotionId, relatedIds: number[]) => {
+  const handleMainEmotionId = (id: EmotionId, relatedIds: EmotionId[]) => {
     const newMap = new Map(emotionMap);
 
     const currentStatus = newMap.get(id);

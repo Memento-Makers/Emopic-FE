@@ -27,7 +27,8 @@
       "@/stores": ["./stores"],
       "@/api": ["./src/api"],
       "@/queries": ["./src/queries"],
-      "@/hooks": ["./src/hooks"]
+      "@/hooks": ["./src/hooks"],
+      "@/model": ["./src/app/model"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

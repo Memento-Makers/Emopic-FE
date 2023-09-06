@@ -30,15 +30,16 @@ export interface PhotoEmotion {
   name: string;
 }
 export interface PhotoEmotionData {
-  main: EmotionId[];
-  sub: EmotionId[];
+  main: Emotion[];
+  sub: Emotion[];
 }
 export interface IndividualPhotoData {
   photoId: number;
   signedUrl: string; // 이미지 다운로드 경로
+  uploadDateTime: string; // "2023-08-30 07:03:56",
   diaryId: number;
   diaryContent: string; // 일기장 내용
-  classes: string[]; // ["분류 1","분류 2","분류 3"]
+  categories: string[]; // ["분류 1","분류 2","분류 3"]
   emotions: PhotoEmotionData;
 }
 

@@ -3,9 +3,8 @@
 interface PhotoKeyType {
   upload: (userId: number, filename: string) => readonly string[];
   caption: (userId: number, photoId: number) => readonly string[];
-  //   all: readonly string[];
-  //   detail: (meetId: number, accessToken: string) => readonly string[];
-  //   candidate: readonly string[];
+  detail: (userId: number, photoId: number) => readonly string[];
+  saveEmotion: (userId: number, photoId: number) => readonly string[];
 }
 
 export const photoKeys: PhotoKeyType = {
@@ -13,8 +12,8 @@ export const photoKeys: PhotoKeyType = {
     ['upload', userId.toString(), filename] as const,
   caption: (userId, photoId) =>
     ['caption', userId.toString(), photoId.toString()] as const,
-  //   all: ['meet'] as const,
-  //   detail: (meetId, accessToken) =>
-  //     [...mainKeys.all, 'detail', meetId.toString(), accessToken] as const,
-  //   candidate: ['meet-candidate'] as const,
+  detail: (userId, photoId) =>
+    ['detail', userId.toString(), photoId.toString()] as const,
+  saveEmotion: (userId, photoId) =>
+    ['emotion', userId.toString(), photoId.toString()] as const,
 };

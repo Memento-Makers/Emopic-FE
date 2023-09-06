@@ -1,5 +1,9 @@
 import { basicFetch, mutateFetch } from '../fetchFunctions';
-import { IndividualPhotoResponse, EmotionInputRequest } from '@/types';
+import {
+  EmotionInputRequest,
+  IndividualPhotoData,
+  EmotionInputData,
+} from '@/types';
 
 export const photoAPI = {
   // 사진 업로드
@@ -17,14 +21,17 @@ export const photoAPI = {
     return result.data;
   },
   // 개별 사진 조회
-  getDetail: async (photoId: number): Promise<IndividualPhotoResponse> => {
-    const result = await basicFetch<IndividualPhotoResponse>(
+  getDetail: async (photoId: number): Promise<IndividualPhotoData> => {
+    const result = await basicFetch<IndividualPhotoData>(
       `api/v1/photos/${photoId}`
     );
     return result.data;
   },
   // 감정 입력
-  addEmotion: async (photoId: number, emotion: EmotionInputRequest) => {
+  addEmotion: async (
+    photoId: number,
+    emotion: EmotionInputRequest
+  ): Promise<EmotionInputData> => {
     const result = await mutateFetch(
       `api/v1/photos/${photoId}/emotions`,
       'POST',

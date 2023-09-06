@@ -1,6 +1,9 @@
 import { useRef } from 'react';
 
-const useModal = () => {
+interface useModalProps {
+  closeCallback?: () => void;
+}
+const useModal = ({ closeCallback }: useModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const openDialog = () => {
@@ -9,8 +12,11 @@ const useModal = () => {
     }
   };
 
-  const closeDialog = () => {
-    if (dialogRef.current) {
+  const closeDialog = (reset: boolean = true) => {
+    if (reset && dialogRef.current) {
+      closeCallback && closeCallback();
+      dialogRef.current.close();
+    } else if (dialogRef.current) {
       dialogRef.current.close();
     }
   };
