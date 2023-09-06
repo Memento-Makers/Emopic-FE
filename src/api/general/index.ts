@@ -20,7 +20,7 @@ export const getOpenAIResponse = async (emotion: string[], caption: string) => {
     messages: [
       {
         role: 'user',
-        content: `일기장을 작성하려고 해요. 오늘 있었던 일은 다음과 같아요: ${caption}, 오늘의 감정은 다음과 같아요 : ${emotion} \n 이 내용을 바탕으로 일기장을 작성해주실래요?`,
+        content: `일기장을 작성하려고 해요. 오늘 있었던 일은 다음과 같아요: ${caption}, 오늘의 감정은 다음과 같아요 : ${emotion} \n 이 내용을 바탕으로 일기장을 작성해주실래요? 이 내용을 바탕으로 일기장을 작성해주실래요? 제가 작성한 말을 반복하지 말아주세요. 전체 길이는 200자 이하로 작성해주세요.`,
       },
     ],
     temperature: 0.7,
