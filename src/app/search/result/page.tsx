@@ -45,7 +45,7 @@ const HitView = ({ hit }: { hit: Hit }) => {
   //검색 결과가 HitView 내용을 반복문 돌며 수행함
   const [hover, setHover] = useState(false);
 
-  const key = hit.snapped_at.split('T')[0]; // 날짜 데이터 중간에 T 들어가 있어서 그걸로 분리함
+  // const key = hit.snapped_at.split('T')[0]; // 날짜 데이터 중간에 T 들어가 있어서 그걸로 분리함
   const { objectID, snapped_at, caption, signed_url, class_list } = hit;
 
   const formattedDate = dayjs(snapped_at).format('YYYY년 M월 D일');
@@ -56,8 +56,8 @@ const HitView = ({ hit }: { hit: Hit }) => {
     objectSet.add(objectID);
   }
 
-  const isNewDate = !dateSet.has(key);
-  if (isNewDate) dateSet.add(key);
+  // const isNewDate = !dateSet.has(key);
+  // if (isNewDate) dateSet.add(key);
 
   return (
     <div
@@ -83,14 +83,15 @@ const HitView = ({ hit }: { hit: Hit }) => {
       </figure>
       <div className="card-body">
         <div className=" flex gap-2">
-          {class_list.map((image_class: string) => (
-            <div
-              key={`${objectID}/${image_class}`}
-              className="badge badge-outline badge-primary"
-            >
-              {image_class}
-            </div>
-          ))}
+          {class_list &&
+            class_list.map((image_class: string) => (
+              <div
+                key={`${objectID}/${image_class}`}
+                className="badge badge-outline badge-primary"
+              >
+                {image_class}
+              </div>
+            ))}
         </div>
         <p>{formattedDate}</p>
         {/* <p>{caption}</p> */}
