@@ -3,6 +3,7 @@ import {
   EmotionInputRequest,
   IndividualPhotoData,
   EmotionInputData,
+  DiaryContentData,
 } from '@/types';
 
 export const photoAPI = {
@@ -50,6 +51,14 @@ export const photoAPI = {
       {
         content,
       }
+    );
+    return result.data;
+  },
+
+  // 일기장 조회
+  getDiary: async (photoId: number) => {
+    const result = await basicFetch<DiaryContentData>(
+      `api/v1/photos/${photoId}/diaries`
     );
     return result.data;
   },
