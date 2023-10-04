@@ -11,6 +11,7 @@ interface PhotoKeyType {
     photoId: number,
     content: string
   ) => readonly string[];
+  all: (userId: number) => readonly string[];
 }
 
 export const photoKeys: PhotoKeyType = {
@@ -20,6 +21,7 @@ export const photoKeys: PhotoKeyType = {
     ['caption', userId.toString(), photoId.toString()] as const,
   detail: (userId, photoId) =>
     ['detail', userId.toString(), photoId.toString()] as const,
+  all: userId => ['all', userId.toString()] as const,
   saveEmotion: (userId, photoId) =>
     ['emotion', userId.toString(), photoId.toString()] as const,
   getDiary: (userId, photoId) =>

@@ -4,6 +4,7 @@ import {
   IndividualPhotoData,
   EmotionInputData,
   DiaryContentData,
+  ThumbnailPhotoData,
 } from '@/types';
 
 export const photoAPI = {
@@ -26,6 +27,11 @@ export const photoAPI = {
     const result = await basicFetch<IndividualPhotoData>(
       `api/v1/photos/${photoId}`
     );
+    return result.data;
+  },
+  // 전체 사진 조회
+  getAll: async (): Promise<ThumbnailPhotoData[]> => {
+    const result = await basicFetch<ThumbnailPhotoData[]>(`api/v1/photos/`);
     return result.data;
   },
   // 감정 입력
