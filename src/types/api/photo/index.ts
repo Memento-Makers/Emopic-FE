@@ -45,4 +45,11 @@ export interface IndividualPhotoData {
 
 export type IndividualPhotoResponse = BasicResponse<IndividualPhotoData>;
 
+// 사진 전체 조회
+export interface ThumbnailPhotoData {
+  photoId: number;
+  thumbnailUrl: string;
+  uploadDateTime: Date;
+}
+
 // 사진 삭제 (명세 미완성)
