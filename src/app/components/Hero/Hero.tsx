@@ -1,6 +1,6 @@
 import { LinkButton } from '@/components';
 
-export const Hero = () => {
+const Hero = () => {
   return (
     <div
       className="hero min-h-screen bg-base-200"
@@ -29,3 +29,5 @@ export const Hero = () => {
     </div>
   );
 };
+
+export default Hero;
