@@ -1,29 +1,22 @@
 'use client';
 
-import { useAllPhoto } from '@/api';
+import { useAllPhoto, useUploadImage } from '@/api';
 import './globals.css';
 import {
   BasicHeader,
   FloatingButton,
-  // Hero,
-  // MainPhotoPreview,
   BeforeUploadToastContent,
   AfterFileUploadToastContent,
+  MainPhotoPreview,
+  MainPhotoPreviewSkeleton,
 } from '@/components';
 import { DUMMY_IMAGE } from '@/constants';
 import { ThumbnailPhotoData } from '@/types';
 import dayjs from 'dayjs';
-
 import { toast } from 'react-toastify';
+import { useInfiniteScroll } from '@/hooks';
+import { RefObject, useEffect, useState } from 'react';
 
-import {
-  useGetSignedURL,
-  useGetCaption,
-  useGetClassification,
-  uploadFile,
-} from '@/api';
-
-import MainPhotoPreview from './components/MainPhotoPreview/MainPhotoPreview';
 interface DateGroup {
   date: string;
   photos: ThumbnailPhotoData[];
@@ -34,7 +27,7 @@ const groupByDate = (photos: ThumbnailPhotoData[]): DateGroup[] => {
   const groupedArray: DateGroup[] = [];
 
   photos.forEach(photo => {
-    const date = dayjs(photo.uploadDateTime).format('YYYY년 MM월 DD일');
+    const date = dayjs(photo.uploadDateTime).format('YYYY년 M월 D일');
 
     if (!groupedMap[date]) {
       groupedMap[date] = [];
@@ -51,25 +44,48 @@ const groupByDate = (photos: ThumbnailPhotoData[]): DateGroup[] => {
 };
 
 export default function Home() {
-  // 1. 데이터를 받아온다.
-  const getSignedURLMutation = useGetSignedURL();
-  const getCaption = useGetCaption();
-  const getClassification = useGetClassification();
+  const postImageUpload = useUploadImage();
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
+    useAllPhoto();
 
-  const { data, isLoading } = useAllPhoto();
+  const [grouped, setGrouped] = useState<DateGroup[]>([]);
 
-  let grouped = [] as DateGroup[];
+  const handleInfiniteScroll = async () => {
+    if (!hasNextPage) {
+      return;
+    }
 
-  // if (data.content) {
-  //   grouped = groupByDate(data.content);
-  // }
+    if (isFetching) {
+      return;
+    }
 
-  if (!isLoading) {
-    grouped = groupByDate(data.content);
-  }
+    if (hasNextPage && !isFetching) {
+      await fetchNextPage();
 
-  console.log('grouped', grouped);
-  console.log('data', data);
+      const newData = data?.pages
+        .map(page => page.content.flat())
+        .flat() as ThumbnailPhotoData[];
+
+      const newGrouped = groupByDate(newData);
+      setGrouped(newGrouped); // 상태 업데이트
+    }
+  };
+
+  const [loader, isScrollFetching] = useInfiniteScroll(() => {
+    handleInfiniteScroll();
+  });
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      // TODO: 백엔드에서 수정하면 flat 부분 수정하기
+      const newData = data?.pages
+        .map(page => page.content.flat())
+        .flat() as ThumbnailPhotoData[];
+
+      const newGrouped = groupByDate(newData);
+      setGrouped(newGrouped);
+    }
+  }, [isLoading, data]);
 
   const handleFileChange = async (files: File[]) => {
     if (files.length > 0) {
@@ -85,26 +101,10 @@ export default function Home() {
 
       try {
         const uploadPromises = files.map(async (file, index) => {
-          // fetchSignedURL 실행
-          const fileName =
-            dayjs().format('YYYYMMDDHHmmssSSS') +
-            process.env.NEXT_PUBLIC_DUMMY_USER_ID +
-            index;
-
-          const { photoId, signedUrl } = await getSignedURLMutation.mutateAsync(
-            fileName
-          );
-
-          // 실제 파일 업로드 로직
-          await uploadFile(signedUrl, file);
-
-          // 이미지 캡션 요청
-          const { caption } = await getCaption.mutateAsync(photoId);
-
-          // 이미지 분류 요청
-          const { categories } = await getClassification.mutateAsync(photoId);
-
-          return { caption, categories, photoId };
+          const formData = new FormData();
+          formData.append('image', file);
+          const res = await postImageUpload.mutateAsync({ formData });
+          return res;
         });
 
         const results = await Promise.all(uploadPromises);
@@ -120,7 +120,6 @@ export default function Home() {
     }
   };
 
-  // 받아온 데이터를 날짜별로 그룹화 한다.
   return (
     <>
       <BasicHeader profileImage={DUMMY_IMAGE} />
@@ -130,15 +129,30 @@ export default function Home() {
         }}
       />
       <main>
-        {/* <Hero /> */}
+        {isLoading && <MainPhotoPreviewSkeleton />}
+
         {!isLoading &&
           grouped.map(group => (
             <MainPhotoPreview
-              key={group.date}
+              key={`previewlist/${group.date}`}
               date={group.date}
               photos={group.photos}
             />
           ))}
+
+        {!isLoading && hasNextPage && (
+          <div
+            className="w-[100%] mb-[24px]"
+            ref={loader as RefObject<HTMLDivElement>}
+          >
+            <div className="flex flex-col justify-center items-center">
+              <div className="loading loading-ring text-primary w-[50px]"></div>
+              <p className=" text-primary text-bold my-1">
+                사진을 불러오는 중...
+              </p>
+            </div>
+          </div>
+        )}
       </main>
     </>
   );
