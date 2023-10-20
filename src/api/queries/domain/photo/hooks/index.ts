@@ -5,3 +5,4 @@ export { default as useSaveEmotion } from './useSaveEmotion';
 export { default as useGetDiary } from './useGetDiary';
 export { default as useMakeDiary } from './useMakeDiary';
 export { default as useAllPhoto } from './useAllPhoto';
+export { default as useUploadImage } from './useUploadImage';

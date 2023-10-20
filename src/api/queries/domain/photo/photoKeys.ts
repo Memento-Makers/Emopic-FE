@@ -12,6 +12,7 @@ interface PhotoKeyType {
     content: string
   ) => readonly string[];
   all: (userId: number) => readonly string[];
+  uploadImage: (userId: number, formData: FormData) => readonly string[];
 }
 
 export const photoKeys: PhotoKeyType = {
@@ -28,4 +29,10 @@ export const photoKeys: PhotoKeyType = {
     ['diary', userId.toString(), photoId.toString()] as const,
   makeDiary: (userId, photoId, content) =>
     ['diary', userId.toString(), photoId.toString(), content] as const,
+  // 이미지 업로드 신 버전
+  uploadImage: (userId, formData) => [
+    'uploadImage',
+    userId.toString(),
+    formData.toString(),
+  ],
 };
