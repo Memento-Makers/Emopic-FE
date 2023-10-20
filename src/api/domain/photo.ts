@@ -4,7 +4,7 @@ import {
   IndividualPhotoData,
   EmotionInputData,
   DiaryContentData,
-  ThumbnailPhotoData,
+  AllPhotoData,
 } from '@/types';
 
 export const photoAPI = {
@@ -29,9 +29,13 @@ export const photoAPI = {
     );
     return result.data;
   },
-  // 전체 사진 조회
-  getAll: async (): Promise<ThumbnailPhotoData[]> => {
-    const result = await basicFetch<ThumbnailPhotoData[]>(`api/v1/photos/`);
+  // 전체 사진 조회 (새로운 버전)
+  getAll: async (page?: number): Promise<AllPhotoData> => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL_DEV}api/v1/photos?page=${page}`
+    );
+
+    const result = await response.json();
     return result.data;
   },
   // 감정 입력
@@ -67,5 +71,18 @@ export const photoAPI = {
       `api/v1/photos/${photoId}/diaries`
     );
     return result.data;
+  },
+
+  // 이미지 업로드 (신버전)
+  uploadImage: async (formData: FormData) => {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL_DEV}api/v1/photos`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
+
+    return result;
   },
 };
