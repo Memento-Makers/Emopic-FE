@@ -1,1 +1,0 @@
-export { ImageCaptionSection } from './ImageCaptionSection';
