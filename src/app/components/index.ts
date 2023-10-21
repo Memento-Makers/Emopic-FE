@@ -18,6 +18,7 @@ export * from './Skeleton';
 export * from './MainPhotoPreview';
 export * from './EmotionIconSmall';
 export * from './MainBottomNavigation';
+export * from './LocationPhoto';
 
 // client component
 export * from './EmotionModalContent';

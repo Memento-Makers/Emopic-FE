@@ -5,6 +5,12 @@ export interface CurrentLocationPhoto {
   count: number; //  사진 개수
 }
 
+export interface LatestLocationPhoto
+  extends Omit<CurrentLocationPhoto, 'count'> {
+  latitude: number;
+  longitude: number;
+}
+
 export interface PhotoWithLocation {
   photoId: number;
   thumbnailUrl: string;
