@@ -128,7 +128,7 @@ const DetailBottomNavigation = ({
 
   return (
     <>
-      <div className="btm-nav absolute bottom-0 ">
+      <div className="btm-nav fixed bottom-0 container sm:mx-auto z-[10]">
         <NavigationButton
           Icon={HiOutlinePhoto}
           label="원본 사진 보기"
