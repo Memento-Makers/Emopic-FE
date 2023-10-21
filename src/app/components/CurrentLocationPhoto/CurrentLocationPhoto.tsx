@@ -21,10 +21,6 @@ type MyState = {
 };
 
 const CurrentLocationPhoto = () => {
-  const [loading, error] = useKakaoLoader({
-    appkey: process.env.NEXT_PUBLIC_KAKAO_KEY as string,
-  });
-
   const [state, setState] = useState<MyState>({
     center: {
       lat: DEFAULT_LAT,
@@ -74,8 +70,6 @@ const CurrentLocationPhoto = () => {
     state.center.lat,
     state.center.lng
   );
-
-  // console.log('data', data);
 
   return (
     <>
