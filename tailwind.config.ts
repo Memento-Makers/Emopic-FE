@@ -6,7 +6,6 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  // TODO: 사용하지 않는 테마 제거하기
   daisyui: {
     styled: true,
     themes: [
