@@ -4,3 +4,10 @@ export interface CurrentLocationPhoto {
   city: string; // 행정구역 명 (TODO: 추후 정의 )
   count: number; //  사진 개수
 }
+
+export interface PhotoWithLocation {
+  photoId: number;
+  thumbnailUrl: string;
+  latitude: number;
+  longitude: number;
+}
