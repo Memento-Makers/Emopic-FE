@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  CustomOverlayMap,
-  Map,
-  MapMarker,
-  useKakaoLoader,
-} from 'react-kakao-maps-sdk';
+import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect } from 'react';
 import { DEFAULT_LAT, DEFAULT_LNG } from '@/constants';
 import { useCurrentLocationPhoto } from '@/api';
@@ -73,7 +68,7 @@ const CurrentLocationPhoto = () => {
 
   return (
     <>
-      {state.isError && (
+      {!state.isLoading && state.isError && (
         <div className=" rounded-lg w-[190px] h-[190px] bg-primary text-white flex items-center justify-center">
           현재 위치를 알 수 없어요..
         </div>
