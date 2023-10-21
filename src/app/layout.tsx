@@ -15,11 +15,6 @@ import { usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
-// if (process.env.NODE_ENV === 'development') {
-//   console.log('MSW 실행중!');
-//   server.listen();
-// }
-
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname() || '';
 

@@ -18,14 +18,10 @@ export interface CategoryData {
 
 export type CategoryResponse = BasicResponse<CategoryData>;
 
-// 분류 결과 전체 조회 (GET), query paramter를 뜻함 (지워야함)
-// /api/v1/photos/catgories?size=6
-
 export interface CategoryAllRequest {
   size: number; // 받고 싶은 상위(사진이 많은 순) 클래스 개수
 }
 
-// TODO: 수정 필요
 export interface CategoryAllData {
   categories: CategoryInfo[];
 }
@@ -33,7 +29,6 @@ export interface CategoryAllData {
 export type CategoryAllResponse = BasicResponse<CategoryAllData>;
 
 // 분류 결과 세부 조회 (GET)
-// /api/v1/photos/categories/categoriId
 export interface CategoryDetailRequest {
   size: number;
   page: number;

@@ -21,7 +21,6 @@ export default function DetailPage({ params }: { params: Params }) {
   const { photoId } = params;
   const { data, isLoading } = useDetailPhoto(parseInt(photoId));
 
-  // TODO: UploadDate의 경우, 백엔드에서 보내준 UTC String 에서 변환해야한다
   return (
     <div className="relative h-[100vh] flex flex-col">
       {!data && <PhotoDetailHeaderSkeleton />}
@@ -40,7 +39,6 @@ export default function DetailPage({ params }: { params: Params }) {
           />
         )}
         {data && (
-          // TODO: 데이터 정제 이후에 next/image로 바꾸기
           <img
             src={data.signedUrl}
             width={200}
