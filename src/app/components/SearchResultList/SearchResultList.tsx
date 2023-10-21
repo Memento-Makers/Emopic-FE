@@ -6,7 +6,6 @@ import { Spacer } from '@/components';
 
 export interface SearchResultListProps {
   date: Date;
-  // TODO: 임시 데이터, 추후 API 명세에 따라 변경하기
   searchResults: searchResult[];
 }
 

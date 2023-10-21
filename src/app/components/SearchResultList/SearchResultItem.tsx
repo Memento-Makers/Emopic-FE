@@ -6,7 +6,6 @@ export interface searchResult {
 }
 
 export interface SearchResultItemProps {
-  // TODO: 임시 데이터, 추후 API 명세에 따라 변경하기
   searchResult: searchResult;
 }
 
@@ -20,7 +19,6 @@ export const SearchResultItem = ({ searchResult }: SearchResultItemProps) => {
           width={135}
           height={135}
         />
-        {/* TODO: 이미지에 저장된 감정 추가하기 부분 */}
       </div>
     </li>
   );

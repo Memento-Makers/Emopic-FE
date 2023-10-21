@@ -1,7 +1,6 @@
 'use client';
 
 import { AiOutlineCloudUpload } from 'react-icons/ai';
-import { useFileStore } from '@/stores';
 
 interface FloatingButtonProps {
   handleFileChange: (files: File[]) => void;

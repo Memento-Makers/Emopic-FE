@@ -7,7 +7,6 @@
 // 301: 슬픔, 302 : 화남, 303: 부끄러움, 304: 피곤함, 305: 초조한
 import { EmotionData } from '@/types';
 export interface Emotion {
-  // TODO: 감정 데이터 확정 시, 재정의 해야함 (각각 unique한 데이터로 저장될 듯)
   emotionId: EmotionId;
   name: string;
 }
