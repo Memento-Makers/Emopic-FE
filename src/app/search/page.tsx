@@ -106,7 +106,9 @@ export default function SearchPage() {
           </h2>
 
           <div className=" flex gap-[10px] mb-[80px] ">
-            <CurrentLocationPhoto />
+            <Link href="/map">
+              <CurrentLocationPhoto />
+            </Link>
 
             {isLocationPhotoLoading && (
               <div className="animate-pulse bg-gray-400 w-[190px] h-[190px] animate-pulse rounded-lg"></div>
