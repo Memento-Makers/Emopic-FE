@@ -15,6 +15,7 @@ export * from './EmotionIcon';
 export * from './BeforeUploadToastContent';
 export * from './AfterFileUploadToastContent';
 export * from './Skeleton';
+export * from './MainBottomNavigation';
 
 // client component
 export * from './EmotionModalContent';
