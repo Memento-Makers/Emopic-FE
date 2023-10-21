@@ -77,9 +77,8 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoading && data) {
-      // TODO: 백엔드에서 수정하면 flat 부분 수정하기
       const newData = data?.pages
-        .map(page => page.content.flat())
+        .map(page => page.content)
         .flat() as ThumbnailPhotoData[];
 
       const newGrouped = groupByDate(newData);
