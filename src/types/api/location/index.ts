@@ -14,4 +14,6 @@ export interface LatestLocationPhoto
 export interface PhotoWithLocation {
   photoId: number;
   thumbnailUrl: string;
+  latitude: number;
+  longitude: number;
 }
