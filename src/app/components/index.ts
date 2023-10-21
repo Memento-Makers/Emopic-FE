@@ -27,6 +27,9 @@ export * from './DetailBottomNavigation';
 export * from './DiaryPageHeader';
 export * from './PreviewList';
 export * from './CurrentLocationPhoto';
+export * from './PhotoLocationMap';
+export * from './HeaderWithBackButton';
+export * from './PhotoLocationMap';
 
 // util component
 export * from './Provider';
