@@ -44,3 +44,17 @@ export type EmotionId =
   | 303
   | 304
   | 305;
+
+export interface Order {
+  direction: string;
+  property: string;
+  ignoreCase: boolean;
+  nullHandling: string;
+}
+export interface Pageable {
+  page: number;
+  size: number;
+  sort: {
+    orders: Order[];
+  };
+}

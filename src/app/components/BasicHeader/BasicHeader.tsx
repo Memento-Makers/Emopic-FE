@@ -1,6 +1,6 @@
 import { Avatar, Logo } from '@/components';
 
-export const BasicHeader = ({ profileImage }: { profileImage: string }) => {
+const BasicHeader = ({ profileImage }: { profileImage: string }) => {
   return (
     <header
       data-theme="winter"
@@ -16,3 +16,5 @@ export const BasicHeader = ({ profileImage }: { profileImage: string }) => {
     </header>
   );
 };
+
+export default BasicHeader;
