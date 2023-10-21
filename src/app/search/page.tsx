@@ -28,71 +28,14 @@ import Link from 'next/link';
 // 해당 페이지로 옮겨야 한다.
 
 export default function SearchPage() {
-  const getSignedURLMutation = useGetSignedURL();
-  const getCaption = useGetCaption();
-  const getClassification = useGetClassification();
-
   // TODO: 추후에 SSR 적용하기
   const { data: categoryData, isLoading: isCategoryLoading } =
     useCategoryAll(10);
 
-  const handleFileChange = async (files: File[]) => {
-    if (files.length > 0) {
-      toast(
-        <BeforeUploadToastContent
-          preview={files[0]}
-          fileCount={files.length}
-        />,
-        {
-          position: toast.POSITION.BOTTOM_RIGHT,
-        }
-      );
-
-      try {
-        const uploadPromises = files.map(async (file, index) => {
-          // fetchSignedURL 실행
-          const fileName =
-            dayjs().format('YYYYMMDDHHmmssSSS') +
-            process.env.NEXT_PUBLIC_DUMMY_USER_ID +
-            index;
-
-          const { photoId, signedUrl } = await getSignedURLMutation.mutateAsync(
-            fileName
-          );
-
-          // 실제 파일 업로드 로직
-          await uploadFile(signedUrl, file);
-
-          // 이미지 캡션 요청
-          const { caption } = await getCaption.mutateAsync(photoId);
-
-          // 이미지 분류 요청
-          const { categories } = await getClassification.mutateAsync(photoId);
-
-          return { caption, categories, photoId };
-        });
-
-        const results = await Promise.all(uploadPromises);
-
-        toast(<AfterFileUploadToastContent files={files} />, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
-      } catch (error) {
-        toast.error('파일을 업로드하는데 문제가 발생하였습니다.', {
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
-      }
-    }
-  };
-
   return (
     <div className="relative h-[100vh] flex flex-col">
       <BasicHeader profileImage="https://picsum.photos/200" />
-      <FloatingButton
-        handleFileChange={files => {
-          handleFileChange(files);
-        }}
-      />
+
       <main className="px-3 flex-grow w-[100%]">
         <Link href="/search/result" className=" cursor-text">
           <div

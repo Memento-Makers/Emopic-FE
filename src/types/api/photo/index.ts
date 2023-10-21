@@ -1,5 +1,5 @@
 import { BasicResponse, PhotoRequest } from '..';
-import { Emotion, EmotionId } from '@/types';
+import { Emotion, EmotionId, Pageable } from '@/types';
 
 // 사진 업로드
 export interface PhotoUploadRequest {
@@ -44,5 +44,23 @@ export interface IndividualPhotoData {
 }
 
 export type IndividualPhotoResponse = BasicResponse<IndividualPhotoData>;
+
+// 사진 전체 조회
+export interface ThumbnailPhotoData {
+  photoId: number;
+  thumbnailUrl: string;
+  uploadDateTime: Date;
+  emotions: PhotoEmotionData;
+  categories: string[];
+}
+export interface AllPhotoData {
+  content: ThumbnailPhotoData[];
+  currentPage: number;
+  empty: boolean;
+  last: boolean;
+  numberOfElements: number;
+  totalElements: number;
+  totalPage: number;
+}
 
 // 사진 삭제 (명세 미완성)
