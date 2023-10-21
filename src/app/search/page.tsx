@@ -2,39 +2,38 @@
 
 import {
   BasicHeader,
-  FloatingButton,
-  BeforeUploadToastContent,
-  AfterFileUploadToastContent,
   PreviewList,
   Spacer,
   PreviewListSkeleton,
+  LocationPhoto,
+  CurrentLocationPhoto,
 } from '@/components';
-import { toast } from 'react-toastify';
 
-import {
-  useGetSignedURL,
-  useGetCaption,
-  useGetClassification,
-  uploadFile,
-  useCategoryAll,
-} from '@/api';
-import dayjs from 'dayjs';
-import { Fragment } from 'react';
-
+import { useLatestLocationPhoto, useCategoryAll } from '@/api';
+import { Fragment, useState } from 'react';
 import Link from 'next/link';
+import { DUMMY_IMAGE } from '@/constants';
 
-// TODO: 현재는 메인 페이지를 SearchPage 로 사용하고 있으나,
-// 이 후에 메인 페이지가 변화할 경우 플로팅 버튼과 관련된 로직을
-// 해당 페이지로 옮겨야 한다.
+import { RxTriangleUp, RxTriangleRight } from 'react-icons/rx';
+import { GrGallery } from 'react-icons/gr';
+import { FaLocationDot } from 'react-icons/fa6';
 
 export default function SearchPage() {
-  // TODO: 추후에 SSR 적용하기
   const { data: categoryData, isLoading: isCategoryLoading } =
     useCategoryAll(10);
 
+  const [showAll, setShowAll] = useState(false);
+
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
+  const { data: locationPhotoData, isLoading: isLocationPhotoLoading } =
+    useLatestLocationPhoto();
+
   return (
     <div className="relative h-[100vh] flex flex-col">
-      <BasicHeader profileImage="https://picsum.photos/200" />
+      <BasicHeader profileImage={DUMMY_IMAGE} />
 
       <main className="px-3 flex-grow w-[100%]">
         <Link href="/search/result" className=" cursor-text">
@@ -48,28 +47,76 @@ export default function SearchPage() {
           </div>
         </Link>
 
-        {isCategoryLoading &&
-          Array.from({ length: 6 }).map((_, index) => (
-            <PreviewListSkeleton key={`preview/skeleton/${index}`} />
-          ))}
+        <section>
+          <div className="flex gap-[5px] items-center mb-[15px]">
+            <h2 className=" text-[24px] font-bold flex gap-[5px] items-center">
+              <GrGallery />
+              분류 별 앨범
+            </h2>
 
-        {!isCategoryLoading &&
-          categoryData!.categories &&
-          categoryData!.categories.map(({ categoryId, name, count }, index) => {
-            if (categoryId === 80) return <div key={categoryId}></div>;
+            <button
+              onClick={toggleShowAll}
+              className="text-primary text-[16px]"
+            >
+              {showAll ? (
+                <span className="flex gap-[5px] items-center">
+                  <RxTriangleUp className="text-[24px]" />
+                  접기
+                </span>
+              ) : (
+                <span className="flex gap-[5px] items-center">
+                  <RxTriangleRight className="text-[24px]" />
+                  분류 더 보기
+                </span>
+              )}
+            </button>
+          </div>
 
-            return (
-              <Fragment key={categoryId}>
-                <PreviewList
-                  key={`${categoryId}/${name}`}
-                  title={name}
-                  categoryId={categoryId}
-                  count={count}
-                />
-                <Spacer size={24} key={`${categoryId}/${name}/${index}`} />
-              </Fragment>
-            );
-          })}
+          {isCategoryLoading &&
+            Array.from({ length: 3 }).map((_, index) => (
+              <PreviewListSkeleton key={`preview/skeleton/${index}`} />
+            ))}
+
+          {!isCategoryLoading && categoryData!.categories && (
+            <>
+              {(showAll
+                ? categoryData!.categories
+                : categoryData!.categories.slice(0, 3)
+              ).map(({ categoryId, name, count }, index) => {
+                return (
+                  <Fragment key={categoryId}>
+                    <PreviewList
+                      key={`${categoryId}/${name}`}
+                      title={name}
+                      categoryId={categoryId}
+                      count={count}
+                    />
+                    <Spacer size={16} key={`${categoryId}/${name}/${index}`} />
+                  </Fragment>
+                );
+              })}
+            </>
+          )}
+        </section>
+
+        <section>
+          <h2 className="text-[24px] font-bold flex gap-[5px] items-center mb-[15px]">
+            <FaLocationDot />
+            장소 별 앨범
+          </h2>
+
+          <div className=" flex gap-[10px] mb-[80px] ">
+            <CurrentLocationPhoto />
+
+            {isLocationPhotoLoading && (
+              <div className="animate-pulse bg-gray-400 w-[190px] h-[190px] animate-pulse rounded-lg"></div>
+            )}
+
+            {!isLocationPhotoLoading && locationPhotoData && (
+              <LocationPhoto photo={locationPhotoData} />
+            )}
+          </div>
+        </section>
       </main>
     </div>
   );

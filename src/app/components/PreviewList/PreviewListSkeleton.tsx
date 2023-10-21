@@ -6,7 +6,7 @@ const PreviewSkeleton = () => {
       <div className="animate-pulse bg-gray-300 h-5 w-[200px] rounded mb-[15px]"></div>
       <div className=" flex gap-[10px] overflow-hidden">
         {Array.from({ length: 3 }).map((_, index) => (
-          <ImageSkeleton key={`skeleton/${index}`} width={150} height={150} />
+          <ImageSkeleton key={`skeleton/${index}`} width={120} height={120} />
         ))}
       </div>
     </section>

@@ -10,7 +10,7 @@ const MainBottomNavigation = () => {
 
   return (
     <>
-      <div className="btm-nav fixed bottom-0 container sm:mx-auto">
+      <div className="btm-nav fixed bottom-0 container sm:mx-auto z-[99999]">
         <NavigationButton
           Icon={HiCamera}
           label="사진"
