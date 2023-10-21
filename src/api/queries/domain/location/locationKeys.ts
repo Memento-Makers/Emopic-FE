@@ -4,6 +4,7 @@ interface locationKeyType {
     longitude: number,
     userId: number
   ) => readonly string[];
+  getAllLocationPhoto: (userId: number) => readonly string[];
 }
 
 export const locationKeys: locationKeyType = {
@@ -15,4 +16,6 @@ export const locationKeys: locationKeyType = {
       longitude.toString(),
       userId.toString(),
     ] as const,
+  getAllLocationPhoto: userId =>
+    ['location', 'all', userId.toString()] as const,
 };
