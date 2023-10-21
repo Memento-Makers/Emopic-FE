@@ -20,7 +20,7 @@ const Hero = () => {
             사진 속 한 장면, 그 순간의 감동을 다시 느껴보세요.
           </p>
           <LinkButton
-            url="/search"
+            url="/"
             content="지금 바로 시작해보세요!"
             className="btn-primary"
           />
