@@ -1,4 +1,3 @@
-import { StyledImage } from '@/components';
 import Link from 'next/link';
 export interface PreviewListItemProps {
   imageUrl: string;
@@ -11,10 +10,10 @@ export const PreviewListItem = ({
 }: PreviewListItemProps) => {
   return (
     <Link href={`photos/${photoId}`}>
-      <div className="carousel-item w-[150px] h-[150px]">
+      <div className="carousel-item w-[120px] h-[120px]">
         <img
-          width={150}
-          height={150}
+          width={120}
+          height={120}
           src={imageUrl}
           alt={'이미지 미리보기'}
           className="rounded object-cover "

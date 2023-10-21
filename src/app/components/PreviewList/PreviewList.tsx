@@ -23,8 +23,8 @@ const PreviewList = ({ title, categoryId, count }: PreviewListProps) => {
           Array.from({ length: 3 }).map((_, index) => (
             <ImageSkeleton
               key={`${categoryId}/skeleton/${index}`}
-              width={150}
-              height={150}
+              width={120}
+              height={120}
             />
           ))}
       </div>

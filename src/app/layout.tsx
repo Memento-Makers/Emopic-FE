@@ -32,11 +32,14 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </head>
 
       <body data-theme="winter" className="container sm:mx-auto h-[100vh]">
+        {!pathname.includes('/photos') && <MainBottomNavigation />}
         <Providers>
           {children}
+
           <ToastContainer />
-          {!pathname.includes('/photos') && <MainBottomNavigation />}
         </Providers>
+
+        <div className="w-[100%] h-[75px] "></div>
       </body>
     </html>
   );
