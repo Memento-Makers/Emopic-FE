@@ -25,6 +25,7 @@ export * from './ModalDialog';
 export * from './DetailBottomNavigation';
 export * from './DiaryPageHeader';
 export * from './PreviewList';
+export * from './CurrentLocationPhoto';
 
 // util component
 export * from './Provider';
