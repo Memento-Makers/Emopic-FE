@@ -7,8 +7,11 @@ import type { Metadata } from 'next';
 
 import { Inter } from 'next/font/google';
 import { Providers } from '@/components';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { MainBottomNavigation } from '@/components';
+import { usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,12 +21,21 @@ const inter = Inter({ subsets: ['latin'] });
 // }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  const pathname = usePathname() || '';
+
   return (
     <html lang="ko">
+      <head>
+        <script
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_KEY}&libraries=services,clusterer&autoload=false`}
+        />
+      </head>
+
       <body data-theme="winter" className="container sm:mx-auto h-[100vh]">
         <Providers>
           {children}
           <ToastContainer />
+          {!pathname.includes('/photos') && <MainBottomNavigation />}
         </Providers>
       </body>
     </html>
