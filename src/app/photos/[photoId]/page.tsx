@@ -22,7 +22,7 @@ export default function DetailPage({ params }: { params: Params }) {
   const { data, isLoading } = useDetailPhoto(parseInt(photoId));
 
   return (
-    <div className="relative h-[100vh] flex flex-col">
+    <div className="relative h-[100%] flex flex-col">
       {!data && <PhotoDetailHeaderSkeleton />}
       {data && (
         <PhotoDetailHeader

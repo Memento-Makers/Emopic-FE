@@ -33,8 +33,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
           <ToastContainer className="z-99999" />
         </Providers>
-
-        <div className="w-[100%] h-[75px] "></div>
       </body>
     </html>
   );

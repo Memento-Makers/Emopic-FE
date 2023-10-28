@@ -153,6 +153,7 @@ export default function Home() {
           </div>
         )}
       </main>
+      <div className="w-[100%] h-[75px] "></div>
     </>
   );
 }
