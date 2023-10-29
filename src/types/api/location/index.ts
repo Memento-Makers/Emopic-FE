@@ -18,6 +18,7 @@ export interface PhotoWithLocation {
   longitude: number;
 }
 
+// 지역 별 대표사진 조회
 export interface RepresentativePhoto {
   city: string;
   thumbnailUrl: string;
