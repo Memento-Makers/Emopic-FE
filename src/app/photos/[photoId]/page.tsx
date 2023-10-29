@@ -27,7 +27,7 @@ export default function DetailPage({ params }: { params: Params }) {
       {data && (
         <PhotoDetailHeader
           categories={data.categories}
-          uploadDate={dayjs(data.uploadDateTime).format('YYYY년 MM월 DD일')}
+          uploadDate={dayjs(data.uploadDateTime).format('YYYY년 M월 D일')}
         />
       )}
 
