@@ -140,6 +140,7 @@ export default function SearchPage() {
             <Hits hitComponent={HitView} />
           </div>
         </InstantSearch>
+        <div className="w-[100%] h-[75px] "></div>
       </main>
     </div>
   );
