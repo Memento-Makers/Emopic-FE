@@ -12,7 +12,7 @@ const apiClient = API(
       highlight_attributes: ['caption', 'class_list'], // 강조할 필드들
       search_attributes: [
         // 검색할 필드들
-        { field: 'caption.nori', weight: 3 },
+        { field: 'caption', weight: 3 },
         { field: 'class_list', weight: 2 },
       ],
       result_attributes: ['caption', 'signed_url', 'class_list', 'snapped_at'], // 결과로 보여줄 필드들
@@ -52,5 +52,6 @@ const apiClient = API(
 export async function POST(req: NextRequest, res: NextResponse) {
   const data = await req.json();
   const results = await apiClient.handleRequest(data);
+
   return NextResponse.json(results);
 }
