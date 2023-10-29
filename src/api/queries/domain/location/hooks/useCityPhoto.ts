@@ -1,14 +1,14 @@
-import { photoAPI, photoKeys } from '@/api';
-import { AllPhotoData } from '@/types';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { locationKeys, locationAPI } from '@/api';
+import { AllPhotoData } from '@/types';
 
 const userId = parseInt(process.env.NEXT_PUBLIC_DUMMY_USER_ID as string) || 1;
 
-const useAllPhoto = () =>
+const useCityPhoto = (city: string) =>
   useInfiniteQuery<AllPhotoData>({
-    queryKey: photoKeys.all(userId),
+    queryKey: locationKeys.getCityPhoto(userId, city),
     queryFn: async ({ pageParam = 0 }) => {
-      const res = await photoAPI.getAll(pageParam);
+      const res = await locationAPI.getCityPhoto(city, pageParam);
       return res;
     },
     getNextPageParam: lastPage => {
@@ -19,4 +19,4 @@ const useAllPhoto = () =>
     },
   });
 
-export default useAllPhoto;
+export default useCityPhoto;

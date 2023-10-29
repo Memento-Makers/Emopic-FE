@@ -1,26 +1,26 @@
 'use client';
 
-import { useAllPhoto, useUploadImage } from '@/api';
-import './globals.css';
+import { useCityPhoto } from '@/api';
 import {
-  BasicHeader,
-  FloatingButton,
-  BeforeUploadToastContent,
-  AfterFileUploadToastContent,
+  HeaderWithBackButton,
   MainPhotoPreview,
   MainPhotoPreviewSkeleton,
 } from '@/components';
-import { DUMMY_IMAGE } from '@/constants';
 import { ThumbnailPhotoData } from '@/types';
-import { toast } from 'react-toastify';
 import { useInfiniteScroll } from '@/hooks';
 import { RefObject, useEffect, useState } from 'react';
 import { groupByDate, DateGroup } from '@/utils';
 
-export default function Home() {
-  const postImageUpload = useUploadImage();
-  const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
-    useAllPhoto();
+interface Params {
+  cityName: string;
+}
+
+export default function CityPage({ params }: { params: Params }) {
+  const { cityName } = params;
+  const city = decodeURIComponent(cityName);
+
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetching } =
+    useCityPhoto(city);
 
   const [grouped, setGrouped] = useState<DateGroup[]>([]);
 
@@ -41,7 +41,7 @@ export default function Home() {
         .flat() as ThumbnailPhotoData[];
 
       const newGrouped = groupByDate(newData);
-      setGrouped(newGrouped); // 상태 업데이트
+      setGrouped(newGrouped);
     }
   };
 
@@ -60,47 +60,10 @@ export default function Home() {
     }
   }, [isLoading, data]);
 
-  const handleFileChange = async (files: File[]) => {
-    if (files.length > 0) {
-      toast(
-        <BeforeUploadToastContent
-          preview={files[0]}
-          fileCount={files.length}
-        />,
-        {
-          position: toast.POSITION.BOTTOM_RIGHT,
-        }
-      );
-
-      try {
-        const uploadPromises = files.map(async (file, index) => {
-          const formData = new FormData();
-          formData.append('image', file);
-          const res = await postImageUpload.mutateAsync({ formData });
-          return res;
-        });
-
-        const results = await Promise.all(uploadPromises);
-
-        toast(<AfterFileUploadToastContent files={files} />, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
-      } catch (error) {
-        toast.error('파일을 업로드하는데 문제가 발생하였습니다.', {
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
-      }
-    }
-  };
-
   return (
     <>
-      <BasicHeader profileImage={DUMMY_IMAGE} />
-      <FloatingButton
-        handleFileChange={files => {
-          handleFileChange(files);
-        }}
-      />
+      <HeaderWithBackButton title={`${city}의 사진`} />
+
       <main>
         {isLoading && <MainPhotoPreviewSkeleton />}
 
