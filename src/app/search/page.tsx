@@ -9,7 +9,11 @@ import {
   CurrentLocationPhoto,
 } from '@/components';
 
-import { useLatestLocationPhoto, useCategoryAll } from '@/api';
+import {
+  useLatestLocationPhoto,
+  useCategoryAll,
+  useRepresentativePhoto,
+} from '@/api';
 import { Fragment, useState } from 'react';
 import Link from 'next/link';
 import { DUMMY_IMAGE } from '@/constants';
@@ -30,6 +34,11 @@ export default function SearchPage() {
 
   const { data: locationPhotoData, isLoading: isLocationPhotoLoading } =
     useLatestLocationPhoto();
+
+  const {
+    data: representativePhotoData,
+    isLoading: isRepresentativePhotoLoading,
+  } = useRepresentativePhoto();
 
   return (
     <div className="relative h-[100vh] flex flex-col">
@@ -105,18 +114,42 @@ export default function SearchPage() {
             장소 별 앨범
           </h2>
 
-          <div className=" flex gap-[10px] mb-[80px] ">
-            <Link href="/map">
-              <CurrentLocationPhoto />
-            </Link>
+          <div className=" overflow-scroll flex">
+            {/* 현재 위치의 사진 */}
+            <div className=" flex gap-[10px] mb-[80px] ">
+              <Link href="/map">
+                <CurrentLocationPhoto />
+              </Link>
 
-            {isLocationPhotoLoading && (
-              <div className="animate-pulse bg-gray-400 w-[190px] h-[190px] animate-pulse rounded-lg"></div>
-            )}
+              {/* 가장 최근에 찍은 사진 */}
+              {isLocationPhotoLoading && (
+                <div className="animate-pulse bg-gray-400 w-[190px] h-[190px] animate-pulse rounded-lg"></div>
+              )}
 
-            {!isLocationPhotoLoading && locationPhotoData && (
-              <LocationPhoto photo={locationPhotoData} />
-            )}
+              {!isLocationPhotoLoading && locationPhotoData && (
+                <LocationPhoto
+                  location={locationPhotoData.city}
+                  thumbnailImage={locationPhotoData.thumbnailUrl}
+                  isLatest={true}
+                />
+              )}
+
+              {/* 지역별 사진 */}
+              {isRepresentativePhotoLoading && (
+                <div className="animate-pulse bg-gray-400 w-[190px] h-[190px] animate-pulse rounded-lg"></div>
+              )}
+
+              {!isRepresentativePhotoLoading &&
+                representativePhotoData &&
+                representativePhotoData.map(photo => (
+                  <LocationPhoto
+                    key={`location/${photo.city}/${process.env.NEXT_PUBLIC_DUMMY_USER_ID}`}
+                    location={photo.city}
+                    thumbnailImage={photo.thumbnailUrl}
+                    isLatest={false}
+                  />
+                ))}
+            </div>
           </div>
         </section>
       </main>
