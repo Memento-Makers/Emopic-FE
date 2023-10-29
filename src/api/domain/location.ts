@@ -49,7 +49,7 @@ export const locationAPI = {
   // 지역의 전체 사진 조회
   getCityPhoto: async (city: string, page: number): Promise<AllPhotoData> => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL_DEV}api/v1/locations/city=${city}&page=${page}`
+      `${process.env.NEXT_PUBLIC_BASE_URL_DEV}api/v1/locations/city/photos?city=${city}&page=${page}`
     );
 
     const result = await response.json();
