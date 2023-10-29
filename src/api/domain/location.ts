@@ -2,6 +2,7 @@ import {
   CurrentLocationPhoto,
   LatestLocationPhoto,
   PhotoWithLocation,
+  RepresentativePhoto,
 } from '@/types';
 
 export const locationAPI = {
@@ -30,6 +31,15 @@ export const locationAPI = {
   getAllLocationPhoto: async (): Promise<PhotoWithLocation[]> => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL_DEV}api/v1/locations`
+    );
+
+    const result = await response.json();
+    return result.data;
+  },
+  // 지역별 대표 사진 조회
+  getRepresentativeLocation: async (): Promise<RepresentativePhoto[]> => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL_DEV}api/v1/locations/city`
     );
 
     const result = await response.json();

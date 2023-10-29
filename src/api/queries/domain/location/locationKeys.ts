@@ -6,6 +6,7 @@ interface locationKeyType {
   ) => readonly string[];
   getLatestLocationPhoto: (userId: number) => readonly string[];
   getAllLocationPhoto: (userId: number) => readonly string[];
+  getRepresentativePhoto: (userId: number) => readonly string[];
 }
 
 export const locationKeys: locationKeyType = {
@@ -21,4 +22,6 @@ export const locationKeys: locationKeyType = {
     ['location', 'latest', userId.toString()] as const,
   getAllLocationPhoto: userId =>
     ['location', 'all', userId.toString()] as const,
+  getRepresentativePhoto: userId =>
+    ['location', 'representative', userId.toString()] as const,
 };
