@@ -29,7 +29,8 @@
       "@/api": ["./src/api"],
       "@/queries": ["./src/queries"],
       "@/hooks": ["./src/hooks"],
-      "@/model": ["./src/app/model"]
+      "@/model": ["./src/app/model"],
+      "@/utils": ["./src/utils"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
