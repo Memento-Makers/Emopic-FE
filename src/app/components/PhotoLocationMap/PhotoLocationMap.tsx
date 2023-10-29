@@ -27,7 +27,7 @@ const PhotoLocationMap = ({ photos }: PhotoLocationMapProps) => {
                   lng: photo.longitude,
                 }}
               >
-                <div className=" w-[100px] h-[100px] border-[3px] border-white rounded-lg shadow-md">
+                <div className=" w-[100px] h-[100px] border-[3px] border-white rounded-lg shadow-md overflow-hidden">
                   <img
                     src={photo.thumbnailUrl}
                     alt={'썸네일 이미지'}
