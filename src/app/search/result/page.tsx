@@ -112,7 +112,7 @@ export default function SearchPage() {
 
       <main className="px-3 flex-grow w-[100%]">
         <InstantSearch
-          indexName="nori_ngram_photo"
+          indexName="nori_photo"
           searchClient={searchClient}
           routing
         >
