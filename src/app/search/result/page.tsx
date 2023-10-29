@@ -15,6 +15,7 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { DUMMY_IMAGE } from '@/constants';
 
 const searchClient = Client({
   url: '/api/search',
@@ -108,7 +109,7 @@ const HitView = ({ hit }: { hit: Hit }) => {
 export default function SearchPage() {
   return (
     <div className="relative flex flex-col">
-      <BasicHeader profileImage="https://picsum.photos/200" />
+      <BasicHeader profileImage={DUMMY_IMAGE} />
 
       <main className="px-3 flex-grow w-[100%]">
         <InstantSearch
