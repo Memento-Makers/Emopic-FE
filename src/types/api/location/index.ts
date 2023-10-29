@@ -17,3 +17,8 @@ export interface PhotoWithLocation {
   latitude: number;
   longitude: number;
 }
+
+export interface RepresentativePhoto {
+  city: string;
+  thumbnailUrl: string;
+}
