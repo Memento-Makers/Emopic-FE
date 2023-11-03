@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import API, { MatchFilter } from '@searchkit/api';
 
-// NEXT_PUBLIC_AI_SEARCH_URL
-
 const apiClient = API(
   {
     connection: {
@@ -15,7 +13,12 @@ const apiClient = API(
         { field: 'caption', weight: 3 },
         { field: 'class_list', weight: 2 },
       ],
-      result_attributes: ['caption', 'signed_url', 'class_list', 'snapped_at'], // 결과로 보여줄 필드들
+      result_attributes: [
+        'caption',
+        'tb_signed_url',
+        'class_list',
+        'snapped_at',
+      ], // 결과로 보여줄 필드들
       snippet_attributes: ['class_list'], // list 항목 나눠서 보여주기
       facet_attributes: [
         {

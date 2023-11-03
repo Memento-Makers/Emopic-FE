@@ -14,7 +14,6 @@ import Client from '@searchkit/instantsearch-client';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { DUMMY_IMAGE } from '@/constants';
 
 const searchClient = Client({
@@ -49,7 +48,7 @@ const HitView = ({ hit }: { hit: Hit }) => {
   const [hover, setHover] = useState(false);
 
   // const key = hit.snapped_at.split('T')[0]; // 날짜 데이터 중간에 T 들어가 있어서 그걸로 분리함
-  const { objectID, snapped_at, caption, signed_url, class_list } = hit;
+  const { objectID, snapped_at, caption, tb_signed_url, class_list } = hit;
 
   const formattedDate = dayjs(snapped_at).format('YYYY년 M월 D일');
 
@@ -74,7 +73,7 @@ const HitView = ({ hit }: { hit: Hit }) => {
           className="relative"
         >
           <img
-            src={signed_url}
+            src={tb_signed_url}
             className={`${
               hover ? 'brightness-75' : 'brightness-100'
             } w-[100%] h-[200px] object-cover`}
