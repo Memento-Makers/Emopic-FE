@@ -14,10 +14,7 @@ const DiaryPageHeader = ({ photoId }: DiaryPageHeaderProps) => {
 
   return (
     <header className=" top-0 text-primary flex  justify-center items-center p-3 w-[100%] relative">
-      <button
-        className="button absolute left-2"
-        onClick={() => router.push(`/photos/${photoId}`)}
-      >
+      <button className="button absolute left-2" onClick={() => router.back()}>
         <PiCaretLeftBold className="text-[32px]" />
       </button>
 
