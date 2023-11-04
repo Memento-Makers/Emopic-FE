@@ -24,7 +24,7 @@ const DiaryPageHeader = ({ photoId }: DiaryPageHeaderProps) => {
       <p className="font-bold text-[24px]">일기장 확인하기</p>
 
       <button className="button absolute right-2">
-        <Link href="/search">
+        <Link href="/">
           <AiOutlineHome className="text-[32px]" />
         </Link>
       </button>
