@@ -8,7 +8,6 @@ import {
   DiaryContentSkeleton,
 } from '@/components';
 import { Emotion } from '@/types';
-import Image from 'next/image';
 
 interface Params {
   diaryId: string; // photoId와 같은 값
@@ -59,6 +58,7 @@ export default function DiaryPage({ params }: { params: Params }) {
             }
             className="absolute z-[999] top-[250px] bg-white rounded-t-[15px] w-[100%] min-h-[500px]"
             photoId={parseInt(diaryId)}
+            caption={data.caption}
           />
         )}
       </div>

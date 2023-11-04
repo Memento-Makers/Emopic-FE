@@ -8,11 +8,12 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 export interface DiaryContentProps {
-  diaryContent: string; // caption
+  diaryContent: string; // 현재 일기장 정보
   emotions: PhotoEmotionData; // 주감정, 서브감정 구분
   emotionList: Emotion[]; // 선택되어 있는 감정 리스트
   className?: string;
   photoId: number;
+  caption: string; // 원본 캡션 정보
 }
 
 const DiaryContent = ({
@@ -21,6 +22,7 @@ const DiaryContent = ({
   emotionList,
   className,
   photoId,
+  caption,
 }: DiaryContentProps) => {
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
   const [currentEmotion, setCurrentEmotion] = useState<EmotionData>(emotions);
@@ -71,7 +73,7 @@ const DiaryContent = ({
           <AddEmotionButton
             emotionList={emotionList}
             photoId={photoId}
-            caption={currentDiary}
+            caption={caption}
             onLoadingChange={handleLoadingChange}
             setEmotions={setCurrentEmotion}
             setDiary={setCurrentDiary}
