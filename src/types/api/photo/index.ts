@@ -41,6 +41,7 @@ export interface IndividualPhotoData {
   diaryContent: string; // 일기장 내용
   categories: string[]; // ["분류 1","분류 2","분류 3"]
   emotions: PhotoEmotionData;
+  caption: string; // 원본 캡션 내용
 }
 
 export type IndividualPhotoResponse = BasicResponse<IndividualPhotoData>;

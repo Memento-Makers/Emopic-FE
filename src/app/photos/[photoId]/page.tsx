@@ -7,7 +7,6 @@ import {
   PhotoDetailHeaderSkeleton,
   DetailBottomNavigationSkeleton,
 } from '@/components';
-import Image from 'next/image';
 
 interface Params {
   photoId: string;
@@ -64,7 +63,7 @@ export default function DetailPage({ params }: { params: Params }) {
               ? [...data.emotions.main, ...data.emotions.sub]
               : ([] as Emotion[])
           }
-          caption={data?.diaryContent as string}
+          caption={data?.caption as string}
         />
       )}
     </div>
