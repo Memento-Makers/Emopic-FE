@@ -1,9 +1,12 @@
 # Style Guide
 
-- 이 프로젝트에서는 다음과 같은 컨벤션을 지키고 있습니다.
-  - Coding Style
-  - Git Convention (Branch, Commit 규칙)
-  - PR, Issue Template
+> 프로젝트의 기여를 위해 아래의 스타일 가이드를 참고해주세요.
+>
+> 이 프로젝트에서는 다음과 같은 컨벤션을 지키고 있습니다.
+
+- [Coding Style](#coding-style)
+- [Git Convention (Branch, Commit 규칙)](#git-convention)
+- [PR, Issue Template](#pr-issue-template)
 
 ## Coding Style
 
