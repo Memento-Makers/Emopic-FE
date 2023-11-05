@@ -111,6 +111,11 @@ Emopic은 인공지능 모델을 통해 사진 내용 기반으로 자동으로 
 
 ### 로컬에서 실행하기
 
+#### 개발 환경
+
+- Node: v18.12.1
+- pnpm 7.30.0
+
 <h4> 1. 레포지토리 클론 </h4>
 
 ```bash
@@ -128,3 +133,9 @@ pnpm install
 ```bash
 pnpm dev
 ```
+
+### License
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMemento-Makers%2FEmopic-FE.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMemento-Makers%2FEmopic-FE?ref=badge_shield)
+
+- 사용 라이센스 목록
