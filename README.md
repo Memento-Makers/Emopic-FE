@@ -92,6 +92,7 @@ Emopic은 인공지능 모델을 통해 사진 내용 기반으로 자동으로 
 ### 언어
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.1.6-%233178C6)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMemento-Makers%2FEmopic-FE.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMemento-Makers%2FEmopic-FE?ref=badge_shield)
 
 ### 프레임워크
 
@@ -128,3 +129,7 @@ pnpm install
 ```bash
 pnpm dev
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMemento-Makers%2FEmopic-FE.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FMemento-Makers%2FEmopic-FE?ref=badge_large)
