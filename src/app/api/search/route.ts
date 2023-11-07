@@ -12,12 +12,14 @@ const apiClient = API(
         // 검색할 필드들
         { field: 'caption', weight: 3 },
         { field: 'class_list', weight: 2 },
+        { field: 'diary', weight: 2 },
       ],
       result_attributes: [
         'caption',
         'tb_signed_url',
         'class_list',
         'snapped_at',
+        'diary',
       ], // 결과로 보여줄 필드들
       snippet_attributes: ['class_list'], // list 항목 나눠서 보여주기
       facet_attributes: [
