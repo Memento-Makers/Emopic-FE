@@ -134,8 +134,11 @@ pnpm install
 pnpm dev
 ```
 
+### 기여 가이드
+
+- 아래의 스타일 가이드를 참고하세요.
+  [Style Guide](https://github.com/Memento-Makers/Emopic-FE/blob/develop/docs/StyleGuide.md)
+
 ### License
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMemento-Makers%2FEmopic-FE.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMemento-Makers%2FEmopic-FE?ref=badge_shield)
-
-- 사용 라이센스 목록
